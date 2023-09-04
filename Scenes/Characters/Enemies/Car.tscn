@@ -65,7 +65,6 @@ size = Vector2(16, 8)
 
 [node name="Car" type="RigidBody2D"]
 process_mode = 3
-scale = Vector2(1.5, 1.5)
 gravity_scale = 0.0
 script = ExtResource("1_chbb7")
 

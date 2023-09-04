@@ -7,11 +7,8 @@ extends CharacterBody2D
 @onready var state_machine = animation_tree.get("parameters/playback")
 @onready var starting_position = global_position
 
-@onready var screen_size
-@onready var pause = false
-@onready var colliding = false 
-@onready var colliding_time = 0
-
+var screen_size
+var pause = false
 signal scored
 signal damage
 
@@ -20,20 +17,9 @@ func _ready():
 	screen_size = get_viewport_rect().size
 
 func _physics_process(delta):
-	if pause:
-		return
-	if colliding:
-		colliding_time -= delta
-		position.y += move_speed * delta
-		if colliding_time <= 0:
-			colliding_time = 0
-			colliding = false
-
-		return
-		
 	var input_direction = Vector2(
-		Input.get_action_strength("wasd_right") - Input.get_action_strength("wasd_left"),
-		Input.get_action_strength("wasd_down") - Input.get_action_strength("wasd_up")
+		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
+		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	)
 	input_direction = input_direction.normalized()	
 	
@@ -61,15 +47,13 @@ func pick_new_state():
 func _on_collision_detector_area_entered(area):
 	if area.name == "HazardArea":
 		emit_signal("damage")
+		global_position = starting_position
 	elif area.name == "VictoryLine":
 		emit_signal("scored")
+		global_position = starting_position
 
 func paused():
 	pause = true
 	process_mode = PROCESS_MODE_DISABLED
 	global_position = starting_position
-
-func knockback():
-	colliding = true
-	$AnimationPlayer.play("fly_away")
-	colliding_time = 0.5
+	
