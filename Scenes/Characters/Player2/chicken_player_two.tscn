@@ -1,7 +1,7 @@
 [gd_scene load_steps=30 format=3 uid="uid://d0rlcvaona643"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Player2/chicken_player_two.gd" id="1_8a8ah"]
-[ext_resource type="Texture2D" uid="uid://77mxco7507gx" path="res://Assets/Player/ChickenSpriteSheet.png" id="1_m5f1y"]
+[ext_resource type="Texture2D" uid="uid://b6vw2igpuqht5" path="res://Assets/Player/DuckSpriteSheet.png" id="2_b3af6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q01n4"]
 size = Vector2(16, 14)
@@ -266,10 +266,9 @@ scale = Vector2(0.7, 0.7)
 script = ExtResource("1_8a8ah")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_m5f1y")
+texture = ExtResource("2_b3af6")
 hframes = 3
 vframes = 5
-frame = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)

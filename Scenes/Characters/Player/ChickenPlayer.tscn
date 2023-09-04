@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cetf8grnsexr5"]
+[gd_scene load_steps=39 format=3 uid="uid://cetf8grnsexr5"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Player/ChickenPlayer.gd" id="1_41on2"]
 [ext_resource type="Texture2D" uid="uid://77mxco7507gx" path="res://Assets/Player/ChickenSpriteSheet.png" id="2_qfhyy"]
@@ -218,6 +218,31 @@ min_space = Vector2(-1, -1.1)
 max_space = Vector2(1, 1.1)
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yyxod"]
+animation = &"fly_away"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dp3mr"]
+animation = &"fly_away"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2ovyh"]
+animation = &"fly_away"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2nmrd"]
+animation = &"fly_away"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_hu8tr"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_yyxod")
+blend_point_0/pos = Vector2(0, 1.1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_dp3mr")
+blend_point_1/pos = Vector2(-1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_2ovyh")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_2nmrd")
+blend_point_3/pos = Vector2(0, -1.1)
+min_space = Vector2(-1, -1.1)
+max_space = Vector2(1, 1.1)
+blend_mode = 1
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qvmnu"]
 animation = &"walk_right"
 
@@ -248,15 +273,25 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ox4lu"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2t7dc"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vv543"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rvowx"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wyteb"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_psoa5"]
 states/End/position = Vector2(902, 100)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_by2n6")
 states/Idle/position = Vector2(335, 100)
+states/Knockback/node = SubResource("AnimationNodeBlendSpace2D_hu8tr")
+states/Knockback/position = Vector2(423, -4.13734)
 states/Start/position = Vector2(195, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_q5d68")
 states/Walk/position = Vector2(501, 100)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_jysjl"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_facyl"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_ox4lu")]
-graph_offset = Vector2(-90, 14)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_jysjl"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_facyl"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_ox4lu"), "Idle", "Knockback", SubResource("AnimationNodeStateMachineTransition_2t7dc"), "Knockback", "Idle", SubResource("AnimationNodeStateMachineTransition_vv543"), "Knockback", "Walk", SubResource("AnimationNodeStateMachineTransition_rvowx"), "Walk", "Knockback", SubResource("AnimationNodeStateMachineTransition_wyteb")]
+graph_offset = Vector2(-90, -82.1373)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oors3"]
 size = Vector2(14, 12)
@@ -270,7 +305,6 @@ script = ExtResource("1_41on2")
 texture = ExtResource("2_qfhyy")
 hframes = 3
 vframes = 5
-frame = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -286,6 +320,7 @@ tree_root = SubResource("AnimationNodeStateMachine_psoa5")
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/Idle/blend_position = Vector2(-0.00240195, -0.0336244)
+parameters/Knockback/blend_position = Vector2(-0.0027855, 0.0319149)
 parameters/Walk/blend_position = Vector2(0, 0)
 
 [node name="CollisionDetector" type="Area2D" parent="."]
