@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4wdi7qi73uj5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lawjh"]
+size = Vector2(426, 13)
+
+[node name="VictoryLine" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(213, 6.5)
+shape = SubResource("RectangleShape2D_lawjh")

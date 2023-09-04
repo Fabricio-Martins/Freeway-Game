@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://h6xn44er5mhs"]
+
+[ext_resource type="Script" path="res://Scenes/MainFreeway.gd" id="1_4qu1w"]
+[ext_resource type="PackedScene" uid="uid://cetf8grnsexr5" path="res://Scenes/Characters/Player/ChickenPlayer.tscn" id="2_6isrp"]
+[ext_resource type="Texture2D" uid="uid://bykyggb5t6vb7" path="res://Assets/Scenario/Road.png" id="2_tdf1v"]
+[ext_resource type="PackedScene" uid="uid://c4wdi7qi73uj5" path="res://Scenes/Scenario/VictoryLine.tscn" id="4_1lj6p"]
+
+[sub_resource type="FontVariation" id="FontVariation_sus78"]
+variation_transform = Transform2D(0.5, 0, 0, 0.5, 0, 0)
+spacing_glyph = -5
+
+[sub_resource type="FontVariation" id="FontVariation_adrgp"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_4qu1w")
+
+[node name="Road" type="Sprite2D" parent="."]
+position = Vector2(213, 120)
+scale = Vector2(0.250588, 0.117647)
+texture = ExtResource("2_tdf1v")
+
+[node name="ChickenPlayer" parent="." instance=ExtResource("2_6isrp")]
+position = Vector2(203, 233)
+
+[node name="TimerFastRoad" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="TimerSlowRoad" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="VictoryLine" parent="." instance=ExtResource("4_1lj6p")]
+position = Vector2(0, 14)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Scoreboard" type="Label" parent="CanvasLayer"]
+offset_left = 199.0
+offset_top = 1.0
+offset_right = 239.0
+offset_bottom = 24.0
+text = "0"
+
+[node name="Health" type="Label" parent="CanvasLayer"]
+offset_left = 278.0
+offset_top = -2.0
+offset_right = 486.0
+offset_bottom = 21.0
+theme_override_fonts/font = SubResource("FontVariation_sus78")
+text = "Lives Left: 5"
+
+[node name="GameOver" type="Label" parent="CanvasLayer"]
+offset_left = 132.0
+offset_top = 92.0
+offset_right = 292.0
+offset_bottom = 115.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_adrgp")
+
+[connection signal="damage" from="ChickenPlayer" to="." method="_on_chicken_player_damage"]
+[connection signal="scored" from="ChickenPlayer" to="." method="_on_chicken_player_scored"]
+[connection signal="timeout" from="TimerFastRoad" to="." method="_on_timer_fast_road_timeout"]
+[connection signal="timeout" from="TimerSlowRoad" to="." method="_on_timer_slow_road_timeout"]
