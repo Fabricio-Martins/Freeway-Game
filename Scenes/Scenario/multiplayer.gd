@@ -4,7 +4,8 @@ const new_car = preload("res://Scenes/Characters/Enemies/Car.tscn")
 
 @onready var slow_road = [164, 133, 104, 88, 58, 43]
 @onready var fast_road = [148, 118, 73, 28]
-@onready var starting_position = $ChickenPlayer.global_position
+@onready var starting_position_one = $ChickenPlayerOne.global_position
+@onready var starting_position_two = $ChickenPlayerTwo.global_position
 @onready var lives = 5
 @onready var player_score = 0
 
@@ -35,23 +36,14 @@ func _on_timer_slow_road_timeout():
 
 
 func _on_chicken_player_damage():
-	lives -= 1
-	var text = "Lives Left: %d"
-	$UI/Health.text = text % [lives]
-	$ChickenPlayer.knockback()
-	if lives == 0:
-		$TimerFastRoad.stop()
-		$TimerSlowRoad.stop()
-		$UI/MarginContainer/GameOver.text = "GAME OVER!"
-		$ChickenPlayer.paused()
-		lives = 5
-
+	pass
 
 func _on_chicken_player_scored():
 	player_score += 1
 	$UI/Scoreboard.text = str(player_score)
 	if player_score >= 3:
 		$UI/MarginContainer/GameOver.text = "YOU WON!"
-		$ChickenPlayer.paused()
+		$ChickenPlayerOne.paused()
+		$ChickenPlayerTwo.paused()
 		$TimerFastRoad.stop()
 		$TimerSlowRoad.stop()

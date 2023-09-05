@@ -1,9 +1,9 @@
-[gd_scene load_steps=39 format=3 uid="uid://d0rlcvaona643"]
+[gd_scene load_steps=39 format=3 uid="uid://byos6hi4bsjv4"]
 
-[ext_resource type="Script" path="res://Scenes/Characters/Player2/chicken_player_two.gd" id="1_8a8ah"]
-[ext_resource type="Texture2D" uid="uid://b6vw2igpuqht5" path="res://Assets/Player/DuckSpriteSheet.png" id="2_b3af6"]
+[ext_resource type="Texture2D" uid="uid://77mxco7507gx" path="res://Assets/Player/ChickenSpriteSheet.png" id="1_ndyc5"]
+[ext_resource type="Script" path="res://Scenes/Characters/Player1/chicken_player_one.gd" id="1_ue3ev"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q01n4"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_15mbe"]
 size = Vector2(16, 14)
 
 [sub_resource type="Animation" id="Animation_wvj4t"]
@@ -218,26 +218,26 @@ min_space = Vector2(-1, -1.1)
 max_space = Vector2(1, 1.1)
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1th2l"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yyxod"]
 animation = &"fly_away"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l7alh"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dp3mr"]
 animation = &"fly_away"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hqsiq"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2ovyh"]
 animation = &"fly_away"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kof2e"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2nmrd"]
 animation = &"fly_away"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_j7svp"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_1th2l")
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_hu8tr"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_yyxod")
 blend_point_0/pos = Vector2(0, 1.1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_l7alh")
+blend_point_1/node = SubResource("AnimationNodeAnimation_dp3mr")
 blend_point_1/pos = Vector2(-1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_hqsiq")
+blend_point_2/node = SubResource("AnimationNodeAnimation_2ovyh")
 blend_point_2/pos = Vector2(1, 0)
-blend_point_3/node = SubResource("AnimationNodeAnimation_kof2e")
+blend_point_3/node = SubResource("AnimationNodeAnimation_2nmrd")
 blend_point_3/pos = Vector2(0, -1.1)
 min_space = Vector2(-1, -1.1)
 max_space = Vector2(1, 1.1)
@@ -273,42 +273,42 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ox4lu"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5f43b"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2t7dc"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wojem"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vv543"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2eycr"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rvowx"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6nvsc"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wyteb"]
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xxfai"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_psoa5"]
 states/End/position = Vector2(902, 100)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_by2n6")
 states/Idle/position = Vector2(335, 100)
-states/Knockback/node = SubResource("AnimationNodeBlendSpace2D_j7svp")
-states/Knockback/position = Vector2(419, -12)
+states/Knockback/node = SubResource("AnimationNodeBlendSpace2D_hu8tr")
+states/Knockback/position = Vector2(423, -4.13734)
 states/Start/position = Vector2(195, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_q5d68")
 states/Walk/position = Vector2(501, 100)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_jysjl"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_facyl"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_ox4lu"), "Idle", "Knockback", SubResource("AnimationNodeStateMachineTransition_5f43b"), "Knockback", "Idle", SubResource("AnimationNodeStateMachineTransition_wojem"), "Knockback", "Walk", SubResource("AnimationNodeStateMachineTransition_2eycr"), "Walk", "Knockback", SubResource("AnimationNodeStateMachineTransition_6nvsc")]
-graph_offset = Vector2(-72, -80)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_jysjl"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_facyl"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_ox4lu"), "Idle", "Knockback", SubResource("AnimationNodeStateMachineTransition_2t7dc"), "Knockback", "Idle", SubResource("AnimationNodeStateMachineTransition_vv543"), "Knockback", "Walk", SubResource("AnimationNodeStateMachineTransition_rvowx"), "Walk", "Knockback", SubResource("AnimationNodeStateMachineTransition_wyteb")]
+graph_offset = Vector2(-78, -69.1373)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_821md"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epqx5"]
 size = Vector2(14, 12)
 
-[node name="ChickenPlayerTwo" type="CharacterBody2D"]
+[node name="ChickenPlayerOne" type="CharacterBody2D"]
+process_mode = 1
 scale = Vector2(0.7, 0.7)
-script = ExtResource("1_8a8ah")
+script = ExtResource("1_ue3ev")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_b3af6")
+texture = ExtResource("1_ndyc5")
 hframes = 3
 vframes = 5
-frame = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_q01n4")
+shape = SubResource("RectangleShape2D_15mbe")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -316,11 +316,11 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_xxfai")
+tree_root = SubResource("AnimationNodeStateMachine_psoa5")
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/Idle/blend_position = Vector2(-0.00240195, -0.0336244)
-parameters/Knockback/blend_position = Vector2(0, 0)
+parameters/Knockback/blend_position = Vector2(-0.0027855, 0.0319149)
 parameters/Walk/blend_position = Vector2(0, 0)
 
 [node name="CollisionDetector" type="Area2D" parent="."]
@@ -329,7 +329,7 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
 position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_821md")
+shape = SubResource("RectangleShape2D_epqx5")
 debug_color = Color(0.996078, 0, 0.215686, 0.419608)
 
 [connection signal="area_entered" from="CollisionDetector" to="." method="_on_collision_detector_area_entered"]

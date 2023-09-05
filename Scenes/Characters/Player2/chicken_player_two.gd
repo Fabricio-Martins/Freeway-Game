@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
 @onready var starting_position = global_position
+@onready var colliding = false 
+@onready var colliding_time = 0
 
 var screen_size
 var pause = false
@@ -17,6 +19,17 @@ func _ready():
 	screen_size = get_viewport_rect().size
 
 func _physics_process(delta):
+	if pause:
+		return
+	if colliding:
+		colliding_time -= delta
+		position.y += move_speed * delta
+		if colliding_time <= 0:
+			colliding_time = 0
+			colliding = false
+
+		return
+		
 	var input_direction = Vector2(
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
 		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
@@ -37,6 +50,7 @@ func update_animation_parameters(move_input : Vector2):
 	if(move_input != Vector2.ZERO):
 		animation_tree.set("parameters/Walk/blend_position", move_input)
 		animation_tree.set("parameters/Idle/blend_position", move_input)
+		animation_tree.set("parameters/Knockback/blend_position", move_input)
 
 func pick_new_state():
 	if(velocity != Vector2.ZERO):
@@ -47,13 +61,15 @@ func pick_new_state():
 func _on_collision_detector_area_entered(area):
 	if area.name == "HazardArea":
 		emit_signal("damage")
-		global_position = starting_position
+		knockback()
 	elif area.name == "VictoryLine":
 		emit_signal("scored")
-		global_position = starting_position
 
 func paused():
 	pause = true
 	process_mode = PROCESS_MODE_DISABLED
-	global_position = starting_position
 	
+func knockback():
+	colliding = true
+	state_machine.travel("Knockback")
+	colliding_time = 0.5

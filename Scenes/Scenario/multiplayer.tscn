@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bykyggb5t6vb7" path="res://Assets/Scenario/Road.png" id="1_ixyy1"]
 [ext_resource type="PackedScene" uid="uid://c4wdi7qi73uj5" path="res://Scenes/Scenario/VictoryLine.tscn" id="2_x73th"]
 [ext_resource type="FontFile" uid="uid://x2h56im3stvs" path="res://Assets/Fonts/EnterCommand.ttf" id="3_3ol1i"]
-[ext_resource type="PackedScene" uid="uid://cetf8grnsexr5" path="res://Scenes/Characters/Player/ChickenPlayer.tscn" id="4_duhir"]
 [ext_resource type="PackedScene" uid="uid://d0rlcvaona643" path="res://Scenes/Characters/Player2/chicken_player_two.tscn" id="5_d55wd"]
+[ext_resource type="PackedScene" uid="uid://byos6hi4bsjv4" path="res://Scenes/Characters/Player1/chicken_player_one.tscn" id="5_e8fi8"]
 
 [sub_resource type="FontVariation" id="FontVariation_adrgp"]
 
@@ -54,7 +54,7 @@ offset_bottom = 115.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("FontVariation_adrgp")
 
-[node name="ChickenPlayer" parent="." instance=ExtResource("4_duhir")]
+[node name="ChickenPlayerOne" parent="." instance=ExtResource("5_e8fi8")]
 position = Vector2(120, 175)
 
 [node name="ChickenPlayerTwo" parent="." instance=ExtResource("5_d55wd")]

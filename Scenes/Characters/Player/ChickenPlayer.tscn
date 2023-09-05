@@ -291,7 +291,7 @@ states/Start/position = Vector2(195, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_q5d68")
 states/Walk/position = Vector2(501, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_jysjl"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_facyl"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_ox4lu"), "Idle", "Knockback", SubResource("AnimationNodeStateMachineTransition_2t7dc"), "Knockback", "Idle", SubResource("AnimationNodeStateMachineTransition_vv543"), "Knockback", "Walk", SubResource("AnimationNodeStateMachineTransition_rvowx"), "Walk", "Knockback", SubResource("AnimationNodeStateMachineTransition_wyteb")]
-graph_offset = Vector2(-90, -82.1373)
+graph_offset = Vector2(-78, -69.1373)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oors3"]
 size = Vector2(14, 12)
