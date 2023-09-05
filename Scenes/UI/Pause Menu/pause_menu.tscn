@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://dl3idxfm4f7vw"]
+
+[ext_resource type="FontFile" uid="uid://bar3txxarkntj" path="res://Assets/Fonts/GamegirlClassic-9MVj.ttf" id="1_lbyl2"]
+[ext_resource type="Script" path="res://Scenes/UI/Pause Menu/pause_menu.gd" id="1_pw4ow"]
+[ext_resource type="FontFile" uid="uid://yer46p5f54ad" path="res://Assets/Fonts/alterebro-pixel-font.ttf" id="2_gtqtn"]
+[ext_resource type="StyleBox" uid="uid://htgk60qdejly" path="res://Assets/non_selected_button.tres" id="3_glbeq"]
+
+[sub_resource type="Theme" id="Theme_haijf"]
+
+[node name="Pause Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pw4ow")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.196078)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainerOne" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(160, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainerOne"]
+layout_mode = 2
+theme = SubResource("Theme_haijf")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("1_lbyl2")
+text = "GAME PAUSED!"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="MarginContainer/VBoxContainerOne"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gtqtn")
+theme_override_styles/normal = ExtResource("3_glbeq")
+text = "Return"
+
+[node name="Controls" type="Button" parent="MarginContainer/VBoxContainerOne"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gtqtn")
+theme_override_styles/normal = ExtResource("3_glbeq")
+text = "Controls"
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainerOne"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gtqtn")
+theme_override_styles/normal = ExtResource("3_glbeq")
+text = "Back to Menu"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainerOne/Resume" to="." method="_on_ResumeButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainerOne/Controls" to="." method="_on_ControlsButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainerOne/Exit" to="." method="_on_ExitButton_pressed"]

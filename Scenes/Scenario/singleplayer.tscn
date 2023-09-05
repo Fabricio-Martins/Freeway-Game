@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://h6xn44er5mhs"]
+[gd_scene load_steps=9 format=3 uid="uid://h6xn44er5mhs"]
 
 [ext_resource type="Script" path="res://Scenes/Scenario/singleplayer.gd" id="1_1skm5"]
 [ext_resource type="Texture2D" uid="uid://bykyggb5t6vb7" path="res://Assets/Scenario/Road.png" id="2_aaixt"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://c4wdi7qi73uj5" path="res://Scenes/Scenario/VictoryLine.tscn" id="4_rxc3i"]
 [ext_resource type="FontFile" uid="uid://bar3txxarkntj" path="res://Assets/Fonts/GamegirlClassic-9MVj.ttf" id="5_t5c57"]
 [ext_resource type="FontFile" uid="uid://x2h56im3stvs" path="res://Assets/Fonts/EnterCommand.ttf" id="5_wi54c"]
+[ext_resource type="StyleBox" uid="uid://htgk60qdejly" path="res://Assets/non_selected_button.tres" id="7_bhh86"]
+[ext_resource type="PackedScene" uid="uid://dl3idxfm4f7vw" path="res://Scenes/UI/Pause Menu/pause_menu.tscn" id="8_miab6"]
 
 [node name="SingleplayerMode" type="Node2D"]
 script = ExtResource("1_1skm5")
@@ -61,7 +63,19 @@ offset_bottom = 16.0
 theme_override_fonts/font = ExtResource("5_wi54c")
 text = "Lives Left: 5"
 
+[node name="Menu" type="Button" parent="UI"]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 31.0
+offset_bottom = 18.0
+theme_override_fonts/font = ExtResource("5_wi54c")
+theme_override_styles/normal = ExtResource("7_bhh86")
+text = "Menu"
+
+[node name="Pause Menu" parent="UI" instance=ExtResource("8_miab6")]
+
 [connection signal="damage" from="ChickenPlayer" to="." method="_on_chicken_player_damage"]
 [connection signal="scored" from="ChickenPlayer" to="." method="_on_chicken_player_scored"]
 [connection signal="timeout" from="TimerFastRoad" to="." method="_on_timer_fast_road_timeout"]
 [connection signal="timeout" from="TimerSlowRoad" to="." method="_on_timer_slow_road_timeout"]
+[connection signal="pressed" from="UI/Menu" to="UI/Pause Menu" method="_on_menu_pressed"]

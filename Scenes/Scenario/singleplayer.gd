@@ -56,3 +56,5 @@ func _on_chicken_player_scored():
 		$ChickenPlayer.paused()
 		$TimerFastRoad.stop()
 		$TimerSlowRoad.stop()
+
+
