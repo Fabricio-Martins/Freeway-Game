@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var move_speed : float = 75
 @export var starting_direction : Vector2 = Vector2(0, 1)
+@export var exported_colliding_time = 0.3
 
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
@@ -72,4 +73,4 @@ func paused():
 func knockback():
 	colliding = true
 	state_machine.travel("Knockback")
-	colliding_time = 0.5
+	colliding_time = exported_colliding_time

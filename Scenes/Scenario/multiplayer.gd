@@ -6,8 +6,8 @@ const new_car = preload("res://Scenes/Characters/Enemies/Car.tscn")
 @onready var fast_road = [148, 118, 73, 28]
 @onready var starting_position_one = $ChickenPlayerOne.global_position
 @onready var starting_position_two = $ChickenPlayerTwo.global_position
-@onready var lives = 5
-@onready var player_score = 0
+@onready var score_player_one = 0
+@onready var score_player_two = 0
 
 func _on_timer_fast_road_timeout():
 	var fast_car = new_car.instantiate()
@@ -38,11 +38,26 @@ func _on_timer_slow_road_timeout():
 func _on_chicken_player_damage():
 	pass
 
-func _on_chicken_player_scored():
-	player_score += 1
-	$UI/Scoreboard.text = str(player_score)
-	if player_score >= 3:
-		$UI/MarginContainer/GameOver.text = "YOU WON!"
+func _on_chicken_player_one_scored():
+	$ChickenPlayerOne.global_position = starting_position_one
+	if score_player_one < 5:
+		score_player_one += 1
+		$UI/ScoreboardOne.text = str(score_player_one)
+	if score_player_one >= 5:
+		$UI/MarginContainer/GameOver.text = "Player One Won!"
+		$ChickenPlayerOne.paused()
+		$ChickenPlayerTwo.paused()
+		$TimerFastRoad.stop()
+		$TimerSlowRoad.stop()
+
+
+func _on_chicken_player_two_scored():
+	$ChickenPlayerTwo.global_position = starting_position_two
+	if score_player_two < 5:
+		score_player_two += 1
+		$UI/ScoreboardTwo.text = str(score_player_two)
+	if score_player_two >= 5:
+		$UI/MarginContainer/GameOver.text = "Player Two Won!"
 		$ChickenPlayerOne.paused()
 		$ChickenPlayerTwo.paused()
 		$TimerFastRoad.stop()
