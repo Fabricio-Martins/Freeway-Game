@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://bar3txxarkntj" path="res://Assets/Fonts/GamegirlClassic-9MVj.ttf" id="5_t5c57"]
 [ext_resource type="FontFile" uid="uid://x2h56im3stvs" path="res://Assets/Fonts/EnterCommand.ttf" id="5_wi54c"]
 [ext_resource type="StyleBox" uid="uid://htgk60qdejly" path="res://Assets/non_selected_button.tres" id="7_bhh86"]
-[ext_resource type="PackedScene" uid="uid://dl3idxfm4f7vw" path="res://Scenes/UI/Pause Menu/pause_menu.tscn" id="8_miab6"]
+[ext_resource type="PackedScene" uid="uid://dl3idxfm4f7vw" path="res://Scenes/UI/Pause Menu/pause_menu.tscn" id="8_dk1p5"]
 
 [node name="SingleplayerMode" type="Node2D"]
 script = ExtResource("1_1skm5")
@@ -72,7 +72,7 @@ theme_override_fonts/font = ExtResource("5_wi54c")
 theme_override_styles/normal = ExtResource("7_bhh86")
 text = "Menu"
 
-[node name="Pause Menu" parent="UI" instance=ExtResource("8_miab6")]
+[node name="Pause Menu" parent="UI" instance=ExtResource("8_dk1p5")]
 
 [connection signal="damage" from="ChickenPlayer" to="." method="_on_chicken_player_damage"]
 [connection signal="scored" from="ChickenPlayer" to="." method="_on_chicken_player_scored"]

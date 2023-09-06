@@ -8,6 +8,7 @@
 [sub_resource type="Theme" id="Theme_haijf"]
 
 [node name="Pause Menu" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,7 +54,7 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_gtqtn")
 theme_override_styles/normal = ExtResource("3_glbeq")
-text = "Return"
+text = "Resume"
 
 [node name="Controls" type="Button" parent="MarginContainer/VBoxContainerOne"]
 layout_mode = 2
