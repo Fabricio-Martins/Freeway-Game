@@ -1,0 +1,111 @@
+[gd_scene load_steps=8 format=3 uid="uid://cpudbbpgpywe7"]
+
+[ext_resource type="FontFile" uid="uid://bar3txxarkntj" path="res://Assets/Fonts/GamegirlClassic-9MVj.ttf" id="1_0hvdu"]
+[ext_resource type="Script" path="res://Scenes/UI/Pause Menu/controls.gd" id="1_5eafp"]
+[ext_resource type="FontFile" uid="uid://yer46p5f54ad" path="res://Assets/Fonts/alterebro-pixel-font.ttf" id="2_8sbpp"]
+[ext_resource type="FontFile" uid="uid://x2h56im3stvs" path="res://Assets/Fonts/EnterCommand.ttf" id="3_7g2dk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c2x6w"]
+bg_color = Color(0, 0.686275, 0.686275, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.345098, 0.360784, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 8.0
+expand_margin_top = 10.0
+expand_margin_right = 8.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="Theme" id="Theme_eb61j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jluxi"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.6)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 3.0
+expand_margin_right = 3.0
+shadow_offset = Vector2(0.5, 0)
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5eafp")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.196078)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 70.0
+offset_top = 32.0
+offset_right = -71.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c2x6w")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_eb61j")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("1_0hvdu")
+text = "Controls"
+horizontal_alignment = 1
+
+[node name="Instructions" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_8sbpp")
+text = "Singleplayer:
+Move the Chicken using the keys WASD
+
+Survive until you can make 3 points!
+"
+
+[node name="Return" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_7g2dk")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jluxi")
+text = "<"
+
+[connection signal="pressed" from="MarginContainer/PanelContainer/VBoxContainer/Return" to="." method="_on_return_pressed"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dl3idxfm4f7vw"]
+[gd_scene load_steps=7 format=3 uid="uid://dl3idxfm4f7vw"]
 
 [ext_resource type="FontFile" uid="uid://bar3txxarkntj" path="res://Assets/Fonts/GamegirlClassic-9MVj.ttf" id="1_lbyl2"]
 [ext_resource type="Script" path="res://Scenes/UI/Pause Menu/pause_menu.gd" id="1_pw4ow"]
 [ext_resource type="FontFile" uid="uid://yer46p5f54ad" path="res://Assets/Fonts/alterebro-pixel-font.ttf" id="2_gtqtn"]
 [ext_resource type="StyleBox" uid="uid://htgk60qdejly" path="res://Assets/non_selected_button.tres" id="3_glbeq"]
+[ext_resource type="PackedScene" uid="uid://cpudbbpgpywe7" path="res://Scenes/UI/Pause Menu/controls.tscn" id="5_4qsye"]
 
 [sub_resource type="Theme" id="Theme_haijf"]
 
@@ -68,6 +69,10 @@ theme_override_fonts/font = ExtResource("2_gtqtn")
 theme_override_styles/normal = ExtResource("3_glbeq")
 text = "Back to Menu"
 
+[node name="Controls" parent="." instance=ExtResource("5_4qsye")]
+layout_mode = 1
+
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Resume" to="." method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Controls" to="." method="_on_ControlsButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Exit" to="." method="_on_ExitButton_pressed"]
+[connection signal="previous" from="Controls" to="." method="_on_controls_previous"]

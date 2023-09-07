@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bywj5of5xn641"]
+[gd_scene load_steps=10 format=3 uid="uid://bywj5of5xn641"]
 
 [ext_resource type="Script" path="res://Scenes/Scenario/multiplayer.gd" id="1_fr3cj"]
 [ext_resource type="Texture2D" uid="uid://bykyggb5t6vb7" path="res://Assets/Scenario/Road.png" id="1_ixyy1"]
@@ -7,6 +7,8 @@
 [ext_resource type="FontFile" uid="uid://bar3txxarkntj" path="res://Assets/Fonts/GamegirlClassic-9MVj.ttf" id="5_61rem"]
 [ext_resource type="PackedScene" uid="uid://d0rlcvaona643" path="res://Scenes/Characters/Player2/chicken_player_two.tscn" id="5_d55wd"]
 [ext_resource type="PackedScene" uid="uid://byos6hi4bsjv4" path="res://Scenes/Characters/Player1/chicken_player_one.tscn" id="5_e8fi8"]
+[ext_resource type="StyleBox" uid="uid://htgk60qdejly" path="res://Assets/non_selected_button.tres" id="6_q43x8"]
+[ext_resource type="PackedScene" uid="uid://dl3idxfm4f7vw" path="res://Scenes/UI/Pause Menu/pause_menu.tscn" id="7_4gl0p"]
 
 [node name="MultiplayerMode" type="Node2D"]
 script = ExtResource("1_fr3cj")
@@ -60,6 +62,17 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 1
 theme_override_fonts/font = ExtResource("5_61rem")
 
+[node name="Menu" type="Button" parent="UI"]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 31.0
+offset_bottom = 18.0
+theme_override_fonts/font = ExtResource("3_3ol1i")
+theme_override_styles/normal = ExtResource("6_q43x8")
+text = "Menu"
+
+[node name="Pause Menu" parent="UI" instance=ExtResource("7_4gl0p")]
+
 [node name="ChickenPlayerOne" parent="." instance=ExtResource("5_e8fi8")]
 position = Vector2(120, 175)
 
@@ -68,5 +81,6 @@ position = Vector2(200, 175)
 
 [connection signal="timeout" from="TimerFastRoad" to="." method="_on_timer_fast_road_timeout" flags=18]
 [connection signal="timeout" from="TimerSlowRoad" to="." method="_on_timer_slow_road_timeout" flags=18]
+[connection signal="pressed" from="UI/Menu" to="UI/Pause Menu" method="_on_menu_pressed"]
 [connection signal="scored" from="ChickenPlayerOne" to="." method="_on_chicken_player_one_scored"]
 [connection signal="scored" from="ChickenPlayerTwo" to="." method="_on_chicken_player_two_scored"]
