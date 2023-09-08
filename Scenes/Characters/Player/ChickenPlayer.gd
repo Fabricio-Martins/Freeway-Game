@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var move_speed : float = 80
 @export var starting_direction : Vector2 = Vector2(0, 1)
-@export var exported_event_duration = 100
+@export var event_duration = 10
 
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
@@ -12,7 +12,6 @@ extends CharacterBody2D
 @onready var pause = false
 @onready var colliding = false 
 @onready var colliding_time = 0
-@onready var event_duration = 0
 
 @onready var event_stuck = false 
 @onready var event_invert = false 
@@ -76,10 +75,8 @@ func paused():
 	process_mode = PROCESS_MODE_DISABLED
 	global_position = starting_position
 
-
 func _on_singleplayer_mode_slow_event():
 	print("Evento de Slow")
-	event_duration = exported_event_duration
 	move_speed = 50
 	await get_tree().create_timer(event_duration).timeout
 	move_speed = 80

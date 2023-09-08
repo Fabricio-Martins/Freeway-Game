@@ -71,22 +71,29 @@ func _on_chicken_player_scored():
 		$TimerSlowRoad.stop()
 
 func _on_timer_event_timeout():
-	current_event = events[randi() % events.size()]
 	match(current_event):
 		"slow":
 			emit_signal("slow_event")
-			$UI/WarningManager.change_message("SLOW EVENT!")
 		"stuck":
 			emit_signal("stuck_event") 
-			$UI/WarningManager.change_message("CLASSIC MODE EVENT!")
 		"invert":
 			emit_signal("invert_event")
-			$UI/WarningManager.change_message("CONFUSION EVENT!")
 		"fog":
 			pass
 			#emit_signal("fog_event")
 
 func _on_timer_warning_timeout():
+	current_event = events[randi() % events.size()]
+	match(current_event):
+		"slow":
+			$UI/WarningManager.change_message("SLOW EVENT!")
+		"stuck":
+			$UI/WarningManager.change_message("CLASSIC MODE EVENT!")
+		"invert":
+			$UI/WarningManager.change_message("CONFUSION EVENT!")
+		"fog":
+			pass
+			
 	$UI/WarningManager.visible = true
 	await get_tree().create_timer(warning_duration).timeout
 	$UI/WarningManager.visible = false
