@@ -7,7 +7,8 @@ const new_car = preload("res://Scenes/Characters/Enemies/Car.tscn")
 @onready var starting_position = $ChickenPlayer.global_position
 @onready var lives = 5
 @onready var player_score = 0
-
+@onready var event_duration = 10
+	
 func _on_timer_fast_road_timeout():
 	var fast_car = new_car.instantiate()
 	add_child(fast_car)
@@ -57,4 +58,5 @@ func _on_chicken_player_scored():
 		$TimerFastRoad.stop()
 		$TimerSlowRoad.stop()
 
-
+func _on_timer_event_timeout():
+	pass

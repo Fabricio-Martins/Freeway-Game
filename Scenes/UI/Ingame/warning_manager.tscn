@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7imfnnvbn0hk"]
+
+[ext_resource type="Script" path="res://Scenes/UI/Ingame/warning_manager.gd" id="1_tnfdw"]
+[ext_resource type="FontFile" uid="uid://x2h56im3stvs" path="res://Assets/Fonts/EnterCommand.ttf" id="2_80pr4"]
+
+[sub_resource type="Animation" id="Animation_ynpp0"]
+resource_name = "FlashText"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Message:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_eoedj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Message:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mctlx"]
+_data = {
+"FlashText": SubResource("Animation_ynpp0"),
+"RESET": SubResource("Animation_eoedj")
+}
+
+[node name="WarningManager" type="CanvasLayer"]
+script = ExtResource("1_tnfdw")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -56.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 0.407843)
+
+[node name="Message" type="Label" parent="MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_80pr4")
+text = "REVERSED CONTROLS!"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer"]
+libraries = {
+"": SubResource("AnimationLibrary_mctlx")
+}
