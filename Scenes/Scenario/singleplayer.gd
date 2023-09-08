@@ -8,6 +8,11 @@ const new_car = preload("res://Scenes/Characters/Enemies/Car.tscn")
 @onready var lives = 5
 @onready var player_score = 0
 @onready var event_duration = 10
+@onready var warning_duration = 5
+
+func _ready():
+	pass
+	#$UI/WarningManager.visible = false
 	
 func _on_timer_fast_road_timeout():
 	var fast_car = new_car.instantiate()
@@ -60,3 +65,9 @@ func _on_chicken_player_scored():
 
 func _on_timer_event_timeout():
 	pass
+
+func _on_timer_warning_timeout():
+	$UI/WarningManager.change_message("ALSO TRY ESPULETA!")
+	$UI/WarningManager.visible = true
+	await get_tree().create_timer(warning_duration).timeout
+	$UI/WarningManager.visible = false
