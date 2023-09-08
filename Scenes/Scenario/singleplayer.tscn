@@ -86,6 +86,9 @@ autostart = true
 wait_time = 25.0
 autostart = true
 
+[connection signal="invert_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_invert_event"]
+[connection signal="slow_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_slow_event"]
+[connection signal="stuck_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_stuck_event"]
 [connection signal="damage" from="ChickenPlayer" to="." method="_on_chicken_player_damage"]
 [connection signal="scored" from="ChickenPlayer" to="." method="_on_chicken_player_scored"]
 [connection signal="timeout" from="TimerFastRoad" to="." method="_on_timer_fast_road_timeout"]

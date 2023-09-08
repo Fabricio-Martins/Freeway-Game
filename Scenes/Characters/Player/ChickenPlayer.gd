@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
-@export var move_speed : float = 75
+@export var move_speed : float = 80
 @export var starting_direction : Vector2 = Vector2(0, 1)
+@export var exported_event_duration = 100
 
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
@@ -11,6 +12,12 @@ extends CharacterBody2D
 @onready var pause = false
 @onready var colliding = false 
 @onready var colliding_time = 0
+@onready var event_duration = 0
+
+@onready var event_stuck = false 
+@onready var event_invert = false 
+
+var input_direction
 
 signal scored
 signal damage
@@ -20,10 +27,17 @@ func _ready():
 	screen_size = get_viewport_rect().size
 
 func _physics_process(delta):
-	var input_direction = Vector2(
-		Input.get_action_strength("wasd_right") - Input.get_action_strength("wasd_left"),
-		Input.get_action_strength("wasd_down") - Input.get_action_strength("wasd_up")
-	)
+	
+	if event_invert:
+		input_direction = Vector2(
+			Input.get_action_strength("wasd_left") - Input.get_action_strength("wasd_right"),
+			Input.get_action_strength("wasd_up") - Input.get_action_strength("wasd_down")
+		)
+	else:
+		input_direction = Vector2(
+			Input.get_action_strength("wasd_right") - Input.get_action_strength("wasd_left"),
+			Input.get_action_strength("wasd_down") - Input.get_action_strength("wasd_up")
+		)
 	input_direction = input_direction.normalized()	
 	
 	update_animation_parameters(input_direction)
@@ -32,6 +46,9 @@ func _physics_process(delta):
 	
 	position.x = clamp(position.x, 10, screen_size.x - 7.5)
 	position.y = clamp(position.y, 10, screen_size.y - 7.5)
+	
+	if event_stuck:
+		input_direction.x = 0
 	
 	move_and_slide()	
 	pick_new_state()
@@ -58,3 +75,23 @@ func paused():
 	pause = true
 	process_mode = PROCESS_MODE_DISABLED
 	global_position = starting_position
+
+
+func _on_singleplayer_mode_slow_event():
+	print("Evento de Slow")
+	event_duration = exported_event_duration
+	move_speed = 50
+	await get_tree().create_timer(event_duration).timeout
+	move_speed = 80
+
+func _on_singleplayer_mode_stuck_event():
+	print("Evento de Y-Axis")
+	event_stuck = true
+	await get_tree().create_timer(event_duration).timeout
+	event_stuck = false
+
+func _on_singleplayer_mode_invert_event():
+	print("Evento de Confusão")
+	event_invert = true
+	await get_tree().create_timer(event_duration).timeout
+	event_invert = false
