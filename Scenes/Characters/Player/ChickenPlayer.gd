@@ -32,6 +32,11 @@ func _physics_process(delta):
 			Input.get_action_strength("wasd_left") - Input.get_action_strength("wasd_right"),
 			Input.get_action_strength("wasd_up") - Input.get_action_strength("wasd_down")
 		)
+	elif event_stuck:
+		input_direction = Vector2(
+			0,
+			Input.get_action_strength("wasd_down") - Input.get_action_strength("wasd_up")
+		)
 	else:
 		input_direction = Vector2(
 			Input.get_action_strength("wasd_right") - Input.get_action_strength("wasd_left"),
@@ -46,8 +51,6 @@ func _physics_process(delta):
 	position.x = clamp(position.x, 10, screen_size.x - 7.5)
 	position.y = clamp(position.y, 10, screen_size.y - 7.5)
 	
-	if event_stuck:
-		input_direction.x = 0
 	
 	move_and_slide()	
 	pick_new_state()

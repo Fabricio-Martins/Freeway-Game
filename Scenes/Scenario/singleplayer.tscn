@@ -74,16 +74,22 @@ theme_override_styles/normal = ExtResource("7_bhh86")
 text = "Menu"
 
 [node name="Pause Menu" parent="UI" instance=ExtResource("8_dk1p5")]
+visible = false
 
 [node name="WarningManager" parent="UI" instance=ExtResource("9_hbx3o")]
 visible = false
 
-[node name="TimerEvent" type="Timer" parent="."]
-wait_time = 30.0
-autostart = true
+[node name="Contador" type="Label" parent="UI"]
+visible = false
+offset_left = 55.0
+offset_top = -3.0
+offset_right = 111.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "TEMPO"
 
-[node name="TimerWarning" type="Timer" parent="."]
-wait_time = 25.0
+[node name="TimerEvent" type="Timer" parent="."]
+wait_time = 15.0
 autostart = true
 
 [connection signal="invert_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_invert_event"]
@@ -95,4 +101,3 @@ autostart = true
 [connection signal="timeout" from="TimerSlowRoad" to="." method="_on_timer_slow_road_timeout"]
 [connection signal="pressed" from="UI/Menu" to="UI/Pause Menu" method="_on_menu_pressed"]
 [connection signal="timeout" from="TimerEvent" to="." method="_on_timer_event_timeout"]
-[connection signal="timeout" from="TimerWarning" to="." method="_on_timer_warning_timeout"]

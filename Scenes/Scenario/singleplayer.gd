@@ -17,9 +17,15 @@ signal stuck_event
 signal invert_event
 signal fog_event
 
+var tempo = 0
+
 func _ready():
 	pass
 	#$UI/WarningManager.visible = false
+
+func _process(delta):
+	tempo += 1
+	$UI/Contador.text = str(tempo)
 	
 func _on_timer_fast_road_timeout():
 	var fast_car = new_car.instantiate()
@@ -71,29 +77,23 @@ func _on_chicken_player_scored():
 		$TimerSlowRoad.stop()
 
 func _on_timer_event_timeout():
+	current_event = events[randi() % events.size()]
 	match(current_event):
 		"slow":
+			await change_warning("SLOW EVENT!")
 			emit_signal("slow_event")
 		"stuck":
-			emit_signal("stuck_event") 
+			await change_warning("CLASSIC MODE EVENT!")
+			emit_signal("stuck_event")
 		"invert":
+			await change_warning("CONFUSION EVENT!")
 			emit_signal("invert_event")
 		"fog":
 			pass
 			#emit_signal("fog_event")
 
-func _on_timer_warning_timeout():
-	current_event = events[randi() % events.size()]
-	match(current_event):
-		"slow":
-			$UI/WarningManager.change_message("SLOW EVENT!")
-		"stuck":
-			$UI/WarningManager.change_message("CLASSIC MODE EVENT!")
-		"invert":
-			$UI/WarningManager.change_message("CONFUSION EVENT!")
-		"fog":
-			pass
-			
+func change_warning(event_name):
+	$UI/WarningManager.change_message(event_name)
 	$UI/WarningManager.visible = true
 	await get_tree().create_timer(warning_duration).timeout
 	$UI/WarningManager.visible = false
