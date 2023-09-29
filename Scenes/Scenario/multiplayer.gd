@@ -8,6 +8,15 @@ const new_car = preload("res://Scenes/Characters/Enemies/Car.tscn")
 @onready var starting_position_two = $ChickenPlayerTwo.global_position
 @onready var score_player_one = 0
 @onready var score_player_two = 0
+@onready var event_duration = 10
+@onready var warning_duration = 5
+@onready var events = ["slow", "stuck", "invert"]
+var current_event
+
+signal slow_event
+signal stuck_event
+signal invert_event
+signal fog_event
 
 func _on_timer_fast_road_timeout():
 	var fast_car = new_car.instantiate()
@@ -62,3 +71,26 @@ func _on_chicken_player_two_scored():
 		$ChickenPlayerTwo.paused()
 		$TimerFastRoad.stop()
 		$TimerSlowRoad.stop()
+
+
+func _on_timer_event_timeout():
+	current_event = events[randi() % events.size()]
+	match(current_event):
+		"slow":
+			await change_warning("SLOW EVENT!")
+			emit_signal("slow_event")
+		"stuck":
+			await change_warning("CLASSIC MODE EVENT!")
+			emit_signal("stuck_event")
+		"invert":
+			await change_warning("CONFUSION EVENT!")
+			emit_signal("invert_event")
+		"fog":
+			pass
+			#emit_signal("fog_event")
+
+func change_warning(event_name):
+	$UI/WarningManager.change_message(event_name)
+	$UI/WarningManager.visible = true
+	await get_tree().create_timer(warning_duration).timeout
+	$UI/WarningManager.visible = false

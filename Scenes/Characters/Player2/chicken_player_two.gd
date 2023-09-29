@@ -10,6 +10,12 @@ extends CharacterBody2D
 @onready var colliding = false 
 @onready var colliding_time = 0
 
+@onready var event_stuck = false 
+@onready var event_invert = false 
+@export var event_duration = 10
+
+var input_direction
+
 var screen_size
 var pause = false
 signal scored
@@ -31,10 +37,21 @@ func _physics_process(delta):
 
 		return
 		
-	var input_direction = Vector2(
-		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
-		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	)
+	if event_invert:
+		input_direction = Vector2(
+			Input.get_action_strength("ui_left") - Input.get_action_strength("ui_right"),
+			Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
+		)
+	elif event_stuck:
+		input_direction = Vector2(
+			0,
+			Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+		)
+	else:
+		input_direction = Vector2(
+			Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
+			Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+		)
 	input_direction = input_direction.normalized()	
 	
 	update_animation_parameters(input_direction)
@@ -74,3 +91,21 @@ func knockback():
 	colliding = true
 	state_machine.travel("Knockback")
 	colliding_time = exported_colliding_time
+
+func _on_multiplayer_mode_slow_event():
+	print("Evento de Slow")
+	move_speed = 50
+	await get_tree().create_timer(event_duration).timeout
+	move_speed = 80
+
+func _on_multiplayer_mode_stuck_event():
+	print("Evento de Y-Axis")
+	event_stuck = true
+	await get_tree().create_timer(event_duration).timeout
+	event_stuck = false
+
+func _on_multiplayer_mode_invert_event():
+	print("Evento de Confusão")
+	event_invert = true
+	await get_tree().create_timer(event_duration).timeout
+	event_invert = false
