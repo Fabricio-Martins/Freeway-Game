@@ -65,11 +65,12 @@ theme_override_fonts/font = ExtResource("5_wi54c")
 text = "Lives Left: 5"
 
 [node name="Menu" type="Button" parent="UI"]
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 31.0
-offset_bottom = 18.0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 24.0
+offset_bottom = 14.0
 theme_override_fonts/font = ExtResource("5_wi54c")
+theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = ExtResource("7_bhh86")
 text = "Menu"
 
@@ -89,7 +90,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "TEMPO"
 
 [node name="TimerEvent" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 20.0
 autostart = true
 
 [connection signal="invert_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_invert_event"]
