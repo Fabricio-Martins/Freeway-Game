@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://h6xn44er5mhs"]
+[gd_scene load_steps=11 format=3 uid="uid://h6xn44er5mhs"]
 
 [ext_resource type="Script" path="res://Scenes/Scenario/singleplayer.gd" id="1_1skm5"]
 [ext_resource type="Texture2D" uid="uid://bykyggb5t6vb7" path="res://Assets/Scenario/Road.png" id="2_aaixt"]
@@ -9,6 +9,7 @@
 [ext_resource type="StyleBox" uid="uid://htgk60qdejly" path="res://Assets/non_selected_button.tres" id="7_bhh86"]
 [ext_resource type="PackedScene" uid="uid://dl3idxfm4f7vw" path="res://Scenes/UI/Pause Menu/pause_menu.tscn" id="8_dk1p5"]
 [ext_resource type="PackedScene" uid="uid://c7imfnnvbn0hk" path="res://Scenes/UI/Ingame/warning_manager.tscn" id="9_hbx3o"]
+[ext_resource type="AudioStream" uid="uid://8o8wkl2em38r" path="res://Soundtrack/ideiagalinha2.ogg" id="10_xc3sd"]
 
 [node name="SingleplayerMode" type="Node2D"]
 script = ExtResource("1_1skm5")
@@ -92,6 +93,10 @@ text = "TEMPO"
 [node name="TimerEvent" type="Timer" parent="."]
 wait_time = 20.0
 autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_xc3sd")
+autoplay = true
 
 [connection signal="invert_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_invert_event"]
 [connection signal="slow_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_slow_event"]

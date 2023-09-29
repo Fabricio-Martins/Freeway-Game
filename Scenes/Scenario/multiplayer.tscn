@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bywj5of5xn641"]
+[gd_scene load_steps=12 format=3 uid="uid://bywj5of5xn641"]
 
 [ext_resource type="Script" path="res://Scenes/Scenario/multiplayer.gd" id="1_fr3cj"]
 [ext_resource type="Texture2D" uid="uid://bykyggb5t6vb7" path="res://Assets/Scenario/Road.png" id="1_ixyy1"]
@@ -10,6 +10,7 @@
 [ext_resource type="StyleBox" uid="uid://htgk60qdejly" path="res://Assets/non_selected_button.tres" id="6_q43x8"]
 [ext_resource type="PackedScene" uid="uid://dl3idxfm4f7vw" path="res://Scenes/UI/Pause Menu/pause_menu.tscn" id="7_4gl0p"]
 [ext_resource type="PackedScene" uid="uid://c7imfnnvbn0hk" path="res://Scenes/UI/Ingame/warning_manager.tscn" id="8_ldq3f"]
+[ext_resource type="AudioStream" uid="uid://8o8wkl2em38r" path="res://Soundtrack/ideiagalinha2.ogg" id="11_4mcre"]
 
 [node name="MultiplayerMode" type="Node2D"]
 script = ExtResource("1_fr3cj")
@@ -88,6 +89,10 @@ position = Vector2(200, 175)
 [node name="TimerEvent" type="Timer" parent="."]
 wait_time = 20.0
 autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_4mcre")
+autoplay = true
 
 [connection signal="invert_event" from="." to="ChickenPlayerOne" method="_on_multiplayer_mode_invert_event"]
 [connection signal="invert_event" from="." to="ChickenPlayerTwo" method="_on_multiplayer_mode_invert_event"]
