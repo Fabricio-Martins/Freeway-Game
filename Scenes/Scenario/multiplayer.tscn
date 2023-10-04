@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bywj5of5xn641"]
+[gd_scene load_steps=13 format=3 uid="uid://bywj5of5xn641"]
 
 [ext_resource type="Script" path="res://Scenes/Scenario/multiplayer.gd" id="1_fr3cj"]
 [ext_resource type="Texture2D" uid="uid://bykyggb5t6vb7" path="res://Assets/Scenario/Road.png" id="1_ixyy1"]
@@ -10,6 +10,7 @@
 [ext_resource type="StyleBox" uid="uid://htgk60qdejly" path="res://Assets/non_selected_button.tres" id="6_q43x8"]
 [ext_resource type="PackedScene" uid="uid://dl3idxfm4f7vw" path="res://Scenes/UI/Pause Menu/pause_menu.tscn" id="7_4gl0p"]
 [ext_resource type="PackedScene" uid="uid://c7imfnnvbn0hk" path="res://Scenes/UI/Ingame/warning_manager.tscn" id="8_ldq3f"]
+[ext_resource type="FontFile" uid="uid://yer46p5f54ad" path="res://Assets/Fonts/alterebro-pixel-font.ttf" id="9_b1t1o"]
 [ext_resource type="AudioStream" uid="uid://8o8wkl2em38r" path="res://Soundtrack/ideiagalinha2.ogg" id="11_4mcre"]
 
 [node name="MultiplayerMode" type="Node2D"]
@@ -50,20 +51,6 @@ theme_override_fonts/font = ExtResource("3_3ol1i")
 theme_override_font_sizes/font_size = 0
 text = "0"
 
-[node name="MarginContainer" type="MarginContainer" parent="UI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="GameOver" type="Label" parent="UI/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 1
-theme_override_fonts/font = ExtResource("5_61rem")
-
 [node name="Menu" type="Button" parent="UI"]
 offset_left = 3.0
 offset_top = 2.0
@@ -90,6 +77,43 @@ theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = ExtResource("6_q43x8")
 text = "Fullscreen (F4)"
 
+[node name="EndScreen" type="MarginContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = 34.0
+offset_right = -79.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/EndScreen"]
+layout_mode = 2
+alignment = 1
+
+[node name="GameOver" type="Label" parent="UI/EndScreen/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("5_61rem")
+text = "GAME OVER!"
+
+[node name="PlayAgain" type="Button" parent="UI/EndScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_b1t1o")
+theme_override_styles/normal = ExtResource("6_q43x8")
+text = "Play Again"
+
+[node name="BackToMenu" type="Button" parent="UI/EndScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_b1t1o")
+theme_override_styles/normal = ExtResource("6_q43x8")
+text = "Back to Menu"
+
 [node name="ChickenPlayerOne" parent="." instance=ExtResource("5_e8fi8")]
 position = Vector2(120, 175)
 
@@ -114,6 +138,8 @@ autoplay = true
 [connection signal="timeout" from="TimerSlowRoad" to="." method="_on_timer_slow_road_timeout" flags=18]
 [connection signal="pressed" from="UI/Menu" to="UI/Pause Menu" method="_on_menu_pressed"]
 [connection signal="pressed" from="UI/Fullscreen" to="." method="_on_fullscreen_pressed"]
+[connection signal="pressed" from="UI/EndScreen/VBoxContainer/PlayAgain" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="UI/EndScreen/VBoxContainer/BackToMenu" to="." method="_on_back_to_menu_pressed"]
 [connection signal="scored" from="ChickenPlayerOne" to="." method="_on_chicken_player_one_scored"]
 [connection signal="scored" from="ChickenPlayerTwo" to="." method="_on_chicken_player_two_scored"]
 [connection signal="timeout" from="TimerEvent" to="." method="_on_timer_event_timeout"]

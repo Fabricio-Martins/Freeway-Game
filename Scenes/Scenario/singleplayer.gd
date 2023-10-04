@@ -22,7 +22,7 @@ var _is_full_screen: bool = true
 var _is_invulnerable: bool = false
 
 func _ready():
-	pass
+	$UI/EndScreen.visible = false
 	#$UI/WarningManager.visible = false
 
 func _toggle_fullscreen() -> void:
@@ -39,8 +39,6 @@ func _on_fullscreen_pressed():
 func _process(delta):
 	if Input.is_action_just_pressed("fullscreen"):
 		_toggle_fullscreen();
-	tempo += 1
-	$UI/Contador.text = str(tempo)
 	
 func _on_timer_fast_road_timeout():
 	var fast_car = new_car.instantiate()
@@ -80,7 +78,8 @@ func _on_chicken_player_damage():
 	if lives <= 0:
 		$TimerFastRoad.stop()
 		$TimerSlowRoad.stop()
-		$UI/MarginContainer/GameOver.text = "GAME OVER!"
+		$UI/EndScreen.visible = true
+		$UI/EndScreen/VBoxContainer/GameOver.text = "GAME OVER!"
 		$ChickenPlayer.paused()
 		lives = 5
 
@@ -116,3 +115,11 @@ func change_warning(event_name):
 	$UI/WarningManager.visible = true
 	await get_tree().create_timer(warning_duration).timeout
 	$UI/WarningManager.visible = false
+
+
+func _on_play_again_pressed():
+	get_tree().reload_current_scene()
+
+
+func _on_back_to_menu_pressed():
+	get_tree().change_scene_to_file("res://Scenes/UI/Menu/menu.tscn")

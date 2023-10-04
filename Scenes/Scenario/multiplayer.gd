@@ -20,6 +20,9 @@ signal fog_event
 
 var _is_full_screen: bool = true
 
+func _ready():
+	$UI/EndScreen.visible = false
+	
 func _toggle_fullscreen() -> void:
 	_is_full_screen = not _is_full_screen
 	
@@ -70,7 +73,8 @@ func _on_chicken_player_one_scored():
 		score_player_one += 1
 		$UI/ScoreboardOne.text = str(score_player_one)
 	if score_player_one >= 10:
-		$UI/MarginContainer/GameOver.text = "Player One Won!"
+		$UI/EndScreen.visible = true
+		$UI/EndScreen/VBoxContainer/GameOver.text = "Player One Won!"
 		$ChickenPlayerOne.paused()
 		$ChickenPlayerTwo.paused()
 		$TimerFastRoad.stop()
@@ -83,7 +87,8 @@ func _on_chicken_player_two_scored():
 		score_player_two += 1
 		$UI/ScoreboardTwo.text = str(score_player_two)
 	if score_player_two >= 10:
-		$UI/MarginContainer/GameOver.text = "Player Two Won!"
+		$UI/EndScreen.visible = true
+		$UI/EndScreen/VBoxContainer/GameOver.text = "Player Two Won!"
 		$ChickenPlayerOne.paused()
 		$ChickenPlayerTwo.paused()
 		$TimerFastRoad.stop()
@@ -113,3 +118,8 @@ func change_warning(event_name):
 	$UI/WarningManager.visible = false
 
 
+func _on_play_again_pressed():
+	get_tree().reload_current_scene()
+
+func _on_back_to_menu_pressed():
+	get_tree().change_scene_to_file("res://Scenes/UI/Menu/menu.tscn")
