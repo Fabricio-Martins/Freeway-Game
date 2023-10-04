@@ -90,8 +90,18 @@ offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "TEMPO"
 
+[node name="Fullscreen" type="Button" parent="UI"]
+offset_left = 29.0
+offset_top = 2.0
+offset_right = 80.0
+offset_bottom = 14.0
+theme_override_fonts/font = ExtResource("5_wi54c")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = ExtResource("7_bhh86")
+text = "Fullscreen (F4)"
+
 [node name="TimerEvent" type="Timer" parent="."]
-wait_time = 20.0
+wait_time = 15.0
 autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
@@ -106,4 +116,5 @@ autoplay = true
 [connection signal="timeout" from="TimerFastRoad" to="." method="_on_timer_fast_road_timeout"]
 [connection signal="timeout" from="TimerSlowRoad" to="." method="_on_timer_slow_road_timeout"]
 [connection signal="pressed" from="UI/Menu" to="UI/Pause Menu" method="_on_menu_pressed"]
+[connection signal="pressed" from="UI/Fullscreen" to="." method="_on_fullscreen_pressed"]
 [connection signal="timeout" from="TimerEvent" to="." method="_on_timer_event_timeout"]

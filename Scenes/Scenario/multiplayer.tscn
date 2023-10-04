@@ -80,6 +80,16 @@ visible = false
 [node name="WarningManager" parent="UI" instance=ExtResource("8_ldq3f")]
 visible = false
 
+[node name="Fullscreen" type="Button" parent="UI"]
+offset_left = 29.0
+offset_top = 2.0
+offset_right = 80.0
+offset_bottom = 14.0
+theme_override_fonts/font = ExtResource("3_3ol1i")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = ExtResource("6_q43x8")
+text = "Fullscreen (F4)"
+
 [node name="ChickenPlayerOne" parent="." instance=ExtResource("5_e8fi8")]
 position = Vector2(120, 175)
 
@@ -87,7 +97,7 @@ position = Vector2(120, 175)
 position = Vector2(200, 175)
 
 [node name="TimerEvent" type="Timer" parent="."]
-wait_time = 20.0
+wait_time = 15.0
 autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
@@ -103,6 +113,7 @@ autoplay = true
 [connection signal="timeout" from="TimerFastRoad" to="." method="_on_timer_fast_road_timeout" flags=18]
 [connection signal="timeout" from="TimerSlowRoad" to="." method="_on_timer_slow_road_timeout" flags=18]
 [connection signal="pressed" from="UI/Menu" to="UI/Pause Menu" method="_on_menu_pressed"]
+[connection signal="pressed" from="UI/Fullscreen" to="." method="_on_fullscreen_pressed"]
 [connection signal="scored" from="ChickenPlayerOne" to="." method="_on_chicken_player_one_scored"]
 [connection signal="scored" from="ChickenPlayerTwo" to="." method="_on_chicken_player_two_scored"]
 [connection signal="timeout" from="TimerEvent" to="." method="_on_timer_event_timeout"]

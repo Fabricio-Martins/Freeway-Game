@@ -8,7 +8,7 @@ const new_car = preload("res://Scenes/Characters/Enemies/Car.tscn")
 @onready var starting_position_two = $ChickenPlayerTwo.global_position
 @onready var score_player_one = 0
 @onready var score_player_two = 0
-@onready var event_duration = 10
+@onready var event_duration = 5
 @onready var warning_duration = 5
 @onready var events = ["slow", "stuck", "invert"]
 var current_event
@@ -18,6 +18,23 @@ signal stuck_event
 signal invert_event
 signal fog_event
 
+var _is_full_screen: bool = true
+
+func _toggle_fullscreen() -> void:
+	_is_full_screen = not _is_full_screen
+	
+	if _is_full_screen:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		
+func _on_fullscreen_pressed():
+	_toggle_fullscreen();
+
+func _process(delta):
+	if Input.is_action_just_pressed("fullscreen"):
+		_toggle_fullscreen();
+	
 func _on_timer_fast_road_timeout():
 	var fast_car = new_car.instantiate()
 	add_child(fast_car)
@@ -49,10 +66,10 @@ func _on_chicken_player_damage():
 
 func _on_chicken_player_one_scored():
 	$ChickenPlayerOne.global_position = starting_position_one
-	if score_player_one < 5:
+	if score_player_one < 10:
 		score_player_one += 1
 		$UI/ScoreboardOne.text = str(score_player_one)
-	if score_player_one >= 5:
+	if score_player_one >= 10:
 		$UI/MarginContainer/GameOver.text = "Player One Won!"
 		$ChickenPlayerOne.paused()
 		$ChickenPlayerTwo.paused()
@@ -62,10 +79,10 @@ func _on_chicken_player_one_scored():
 
 func _on_chicken_player_two_scored():
 	$ChickenPlayerTwo.global_position = starting_position_two
-	if score_player_two < 5:
+	if score_player_two < 10:
 		score_player_two += 1
 		$UI/ScoreboardTwo.text = str(score_player_two)
-	if score_player_two >= 5:
+	if score_player_two >= 10:
 		$UI/MarginContainer/GameOver.text = "Player Two Won!"
 		$ChickenPlayerOne.paused()
 		$ChickenPlayerTwo.paused()
@@ -94,3 +111,5 @@ func change_warning(event_name):
 	$UI/WarningManager.visible = true
 	await get_tree().create_timer(warning_duration).timeout
 	$UI/WarningManager.visible = false
+
+

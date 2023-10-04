@@ -2,12 +2,12 @@ extends Node2D
 
 const new_car = preload("res://Scenes/Characters/Enemies/Car.tscn")
 
-@onready var slow_road = [164, 133, 104, 88, 58, 43]
+@onready var slow_road = [133, 104, 88, 58, 43]
 @onready var fast_road = [148, 118, 73, 28]
 @onready var starting_position = $ChickenPlayer.global_position
 @onready var lives = 5
 @onready var player_score = 0
-@onready var event_duration = 10
+@onready var event_duration = 5
 @onready var warning_duration = 5
 @onready var events = ["slow", "stuck", "invert"]
 var current_event
@@ -18,12 +18,27 @@ signal invert_event
 signal fog_event
 
 var tempo = 0
+var _is_full_screen: bool = true
+var _is_invulnerable: bool = false
 
 func _ready():
 	pass
 	#$UI/WarningManager.visible = false
 
+func _toggle_fullscreen() -> void:
+	_is_full_screen = not _is_full_screen
+	
+	if _is_full_screen:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		
+func _on_fullscreen_pressed():
+	_toggle_fullscreen()
+	
 func _process(delta):
+	if Input.is_action_just_pressed("fullscreen"):
+		_toggle_fullscreen();
 	tempo += 1
 	$UI/Contador.text = str(tempo)
 	
@@ -56,9 +71,13 @@ func _on_timer_slow_road_timeout():
 func _on_chicken_player_damage():
 	lives -= 1
 	var text = "Lives Left: %d"
-	$UI/Health.text = text % [lives]
+	if lives >= 0:
+		$UI/Health.text = text % [lives]
 	$ChickenPlayer.global_position = starting_position
-	if lives == 0:
+	_is_invulnerable = true
+	await get_tree().create_timer(0.5).timeout
+	_is_invulnerable = false
+	if lives <= 0:
 		$TimerFastRoad.stop()
 		$TimerSlowRoad.stop()
 		$UI/MarginContainer/GameOver.text = "GAME OVER!"
@@ -70,11 +89,11 @@ func _on_chicken_player_scored():
 	player_score += 1
 	$UI/Scoreboard.text = str(player_score)
 	$ChickenPlayer.global_position = starting_position
-	if player_score >= 3:
-		$UI/MarginContainer/GameOver.text = "YOU WON!"
-		$ChickenPlayer.paused()
-		$TimerFastRoad.stop()
-		$TimerSlowRoad.stop()
+	#if player_score >= 3:
+	#	$UI/MarginContainer/GameOver.text = "YOU WON!"
+	#	$ChickenPlayer.paused()
+	#	$TimerFastRoad.stop()
+	#	$TimerSlowRoad.stop()
 
 func _on_timer_event_timeout():
 	current_event = events[randi() % events.size()]

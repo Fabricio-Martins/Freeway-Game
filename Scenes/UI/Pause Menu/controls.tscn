@@ -118,7 +118,7 @@ text = "Singleplayer:
 Sobreviva o máximo que conseguir!
 
 Multiplayer:
-O primeiro a conseguir 5 pontos ganha!"
+O primeiro a conseguir 10 pontos ganha!"
 
 [node name="Controls_help" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
