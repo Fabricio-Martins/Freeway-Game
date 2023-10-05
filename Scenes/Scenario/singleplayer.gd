@@ -7,7 +7,7 @@ const new_car = preload("res://Scenes/Characters/Enemies/Car.tscn")
 @onready var starting_position = $ChickenPlayer.global_position
 @onready var lives = 5
 @onready var player_score = 0
-@onready var event_duration = 5
+@onready var event_duration = 10
 @onready var warning_duration = 5
 @onready var events = ["slow", "stuck", "invert"]
 var current_event
@@ -23,7 +23,7 @@ var _is_invulnerable: bool = false
 
 func _ready():
 	$UI/EndScreen.visible = false
-	#$UI/WarningManager.visible = false
+	$UI/TimerEvento.visible = false
 
 func _toggle_fullscreen() -> void:
 	_is_full_screen = not _is_full_screen
@@ -39,6 +39,7 @@ func _on_fullscreen_pressed():
 func _process(delta):
 	if Input.is_action_just_pressed("fullscreen"):
 		_toggle_fullscreen();
+	$UI/TimerEvento.text = "EVENT DURATION: " + str($EventDuration.time_left)
 	
 func _on_timer_fast_road_timeout():
 	var fast_car = new_car.instantiate()
@@ -109,6 +110,7 @@ func _on_timer_event_timeout():
 		"fog":
 			pass
 			#emit_signal("fog_event")
+	
 
 func change_warning(event_name):
 	$UI/WarningManager.change_message(event_name)

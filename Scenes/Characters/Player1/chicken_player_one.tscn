@@ -1,7 +1,8 @@
-[gd_scene load_steps=39 format=3 uid="uid://byos6hi4bsjv4"]
+[gd_scene load_steps=40 format=3 uid="uid://byos6hi4bsjv4"]
 
 [ext_resource type="Texture2D" uid="uid://77mxco7507gx" path="res://Assets/Player/ChickenSpriteSheet.png" id="1_ndyc5"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player1/chicken_player_one.gd" id="1_ue3ev"]
+[ext_resource type="AudioStream" uid="uid://birwmsrtxanbj" path="res://Soundtrack/galinha_sfx.ogg" id="3_np7tk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_15mbe"]
 size = Vector2(16, 14)
@@ -331,5 +332,9 @@ collision_mask = 4
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_epqx5")
 debug_color = Color(0.996078, 0, 0.215686, 0.419608)
+
+[node name="DamageChickenSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_np7tk")
+volume_db = 10.0
 
 [connection signal="area_entered" from="CollisionDetector" to="." method="_on_collision_detector_area_entered"]

@@ -81,6 +81,7 @@ func _on_collision_detector_area_entered(area):
 	if area.name == "HazardArea":
 		emit_signal("damage")
 		knockback()
+		$DamageChickenSFX.play()
 	elif area.name == "VictoryLine":
 		emit_signal("scored")
 

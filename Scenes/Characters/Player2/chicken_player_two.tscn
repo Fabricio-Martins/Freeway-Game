@@ -1,7 +1,8 @@
-[gd_scene load_steps=39 format=3 uid="uid://d0rlcvaona643"]
+[gd_scene load_steps=40 format=3 uid="uid://d0rlcvaona643"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Player2/chicken_player_two.gd" id="1_8a8ah"]
 [ext_resource type="Texture2D" uid="uid://b6vw2igpuqht5" path="res://Assets/Player/DuckSpriteSheet.png" id="2_b3af6"]
+[ext_resource type="AudioStream" uid="uid://sqgh07utwq22" path="res://Soundtrack/pato_sfx.ogg" id="3_dor5c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q01n4"]
 size = Vector2(16, 14)
@@ -330,5 +331,8 @@ collision_mask = 4
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_821md")
 debug_color = Color(0.996078, 0, 0.215686, 0.419608)
+
+[node name="DamageDuckSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_dor5c")
 
 [connection signal="area_entered" from="CollisionDetector" to="." method="_on_collision_detector_area_entered"]

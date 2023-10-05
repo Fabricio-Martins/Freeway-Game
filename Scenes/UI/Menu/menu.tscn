@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c00betudi16kj"]
+[gd_scene load_steps=8 format=3 uid="uid://c00betudi16kj"]
 
 [ext_resource type="Script" path="res://Scenes/UI/Menu/menu.gd" id="1_uun7w"]
 [ext_resource type="FontFile" uid="uid://bar3txxarkntj" path="res://Assets/Fonts/GamegirlClassic-9MVj.ttf" id="1_wbdkw"]
 [ext_resource type="FontFile" uid="uid://yer46p5f54ad" path="res://Assets/Fonts/alterebro-pixel-font.ttf" id="2_7sj83"]
 [ext_resource type="StyleBox" uid="uid://htgk60qdejly" path="res://Assets/non_selected_button.tres" id="3_ahxo5"]
 [ext_resource type="AudioStream" uid="uid://bowkdmq7jx6bw" path="res://Soundtrack/galinha1v2.ogg" id="5_osdt6"]
+[ext_resource type="PackedScene" uid="uid://djohl2wslk4em" path="res://Scenes/UI/Menu/utf_logo.tscn" id="6_hgdib"]
 
 [sub_resource type="Theme" id="Theme_haijf"]
 
@@ -72,6 +73,13 @@ text = "Exit"
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_osdt6")
 autoplay = true
+
+[node name="UTFlogo" parent="." instance=ExtResource("6_hgdib")]
+offset_left = 33.0
+offset_top = 148.0
+offset_right = 33.0
+offset_bottom = 148.0
+scale = Vector2(0.6, 0.6)
 
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Singleplayer" to="." method="_on_singleplayer_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Multiplayer" to="." method="_on_multiplayer_pressed"]

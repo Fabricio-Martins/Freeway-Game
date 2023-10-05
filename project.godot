@@ -15,6 +15,11 @@ run/main_scene="res://Scenes/UI/Menu/menu.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://Assets/ChickenSidesIdle01.png"
 
+[autoload]
+
+Global="*res://global.gd"
+SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
+
 [display]
 
 window/size/viewport_width=320

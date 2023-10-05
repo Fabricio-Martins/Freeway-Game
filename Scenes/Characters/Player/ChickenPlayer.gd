@@ -70,6 +70,7 @@ func pick_new_state():
 func _on_collision_detector_area_entered(area):
 	if area.name == "HazardArea":
 		emit_signal("damage")
+		$DamageSFX.play()
 	elif area.name == "VictoryLine":
 		emit_signal("scored")
 
