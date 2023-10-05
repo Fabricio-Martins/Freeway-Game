@@ -64,13 +64,13 @@ text = "GAME OVER!"
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_aruy8")
 theme_override_styles/normal = ExtResource("7_bhh86")
-text = "Play Again"
+text = "Jogar Novamente"
 
 [node name="BackToMenu" type="Button" parent="UI/EndScreen/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_aruy8")
 theme_override_styles/normal = ExtResource("7_bhh86")
-text = "Back to Menu"
+text = "Voltar ao Menu"
 
 [node name="Scoreboard" type="Label" parent="UI"]
 offset_left = 160.0

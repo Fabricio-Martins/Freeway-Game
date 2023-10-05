@@ -48,28 +48,29 @@ theme = SubResource("Theme_haijf")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 10
 theme_override_fonts/font = ExtResource("1_lbyl2")
-text = "GAME PAUSED!"
+text = "JOGO PAUSADO!"
 horizontal_alignment = 1
 
 [node name="Resume" type="Button" parent="MarginContainer/VBoxContainerOne"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_gtqtn")
 theme_override_styles/normal = ExtResource("3_glbeq")
-text = "Resume"
+text = "Resumir"
 
 [node name="Controls" type="Button" parent="MarginContainer/VBoxContainerOne"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_gtqtn")
 theme_override_styles/normal = ExtResource("3_glbeq")
-text = "Controls"
+text = "Controles"
 
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainerOne"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_gtqtn")
 theme_override_styles/normal = ExtResource("3_glbeq")
-text = "Back to Menu"
+text = "Voltar para o Menu"
 
 [node name="Controls" parent="." instance=ExtResource("5_4qsye")]
+visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Resume" to="." method="_on_ResumeButton_pressed"]

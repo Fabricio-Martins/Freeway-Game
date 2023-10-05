@@ -108,13 +108,14 @@ text = "GAME OVER!"
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_b1t1o")
 theme_override_styles/normal = ExtResource("6_q43x8")
-text = "Play Again"
+text = "Jogar Novamente"
 
 [node name="BackToMenu" type="Button" parent="UI/EndScreen/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_b1t1o")
 theme_override_styles/normal = ExtResource("6_q43x8")
-text = "Back to Menu"
+text = "Voltar ao Menu
+"
 
 [node name="ChickenPlayerOne" parent="." instance=ExtResource("5_e8fi8")]
 position = Vector2(120, 175)

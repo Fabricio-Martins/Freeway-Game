@@ -68,7 +68,7 @@ text = "Multiplayer"
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_7sj83")
 theme_override_styles/normal = ExtResource("3_ahxo5")
-text = "Exit"
+text = "Sair"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_osdt6")
@@ -79,7 +79,7 @@ offset_left = 33.0
 offset_top = 148.0
 offset_right = 33.0
 offset_bottom = 148.0
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.6, 0.608028)
 
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Singleplayer" to="." method="_on_singleplayer_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Multiplayer" to="." method="_on_multiplayer_pressed"]

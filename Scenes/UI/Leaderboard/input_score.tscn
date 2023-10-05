@@ -1,0 +1,137 @@
+[gd_scene load_steps=10 format=3 uid="uid://cpq7tfbnqb4fp"]
+
+[ext_resource type="Script" path="res://Scenes/UI/Pause Menu/controls.gd" id="1_pra8d"]
+[ext_resource type="FontFile" uid="uid://bar3txxarkntj" path="res://Assets/Fonts/GamegirlClassic-9MVj.ttf" id="2_6gwe4"]
+[ext_resource type="FontFile" uid="uid://byxke44phuhpw" path="res://Assets/Fonts/Coders_Crux.ttf" id="3_fkxpb"]
+[ext_resource type="FontFile" uid="uid://x2h56im3stvs" path="res://Assets/Fonts/EnterCommand.ttf" id="4_rxjaw"]
+[ext_resource type="StyleBox" uid="uid://c08g3462e4gty" path="res://Assets/controls_button.tres" id="5_rsw51"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c2x6w"]
+bg_color = Color(0, 0.686275, 0.686275, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.345098, 0.360784, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 8.0
+expand_margin_top = 10.0
+expand_margin_right = 8.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="Theme" id="Theme_eb61j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_odk6q"]
+bg_color = Color(0.694118, 0.694118, 0.694118, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.6)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 3.0
+expand_margin_right = 3.0
+shadow_offset = Vector2(0.5, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sdxkd"]
+bg_color = Color(0.701961, 0.701961, 0.701961, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.6)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 3.0
+expand_margin_right = 3.0
+shadow_offset = Vector2(0.5, 0)
+
+[node name="InputScore" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pra8d")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.196078)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 45.0
+offset_right = -120.0
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c2x6w")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.5
+offset_top = -35.0
+offset_right = 46.5
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="MarginContainer/PanelContainer/Panel/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_eb61j")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("2_6gwe4")
+theme_override_font_sizes/font_size = 8
+text = "insira 
+seu nome:"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/PanelContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("3_fkxpb")
+alignment = 1
+max_length = 12
+
+[node name="Submit" type="Button" parent="MarginContainer/PanelContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_rxjaw")
+theme_override_styles/normal = ExtResource("5_rsw51")
+theme_override_styles/hover = SubResource("StyleBoxFlat_odk6q")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sdxkd")
+text = "Enviar"
