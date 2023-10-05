@@ -81,6 +81,20 @@ offset_right = 33.0
 offset_bottom = 148.0
 scale = Vector2(0.6, 0.608028)
 
+[node name="Creditos" type="Label" parent="."]
+offset_left = 228.0
+offset_top = 143.0
+offset_right = 340.0
+offset_bottom = 179.0
+theme = SubResource("Theme_haijf")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("2_7sj83")
+theme_override_font_sizes/font_size = 10
+text = "Programação: Fabricio Damasceno
+Música: Gustavo Favaro
+Artes Adicionais:  Lucca Toledo"
+
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Singleplayer" to="." method="_on_singleplayer_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Multiplayer" to="." method="_on_multiplayer_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Exit" to="." method="_on_exit_pressed"]

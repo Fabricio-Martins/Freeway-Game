@@ -79,6 +79,10 @@ func _on_chicken_player_one_scored():
 		$ChickenPlayerTwo.paused()
 		$TimerFastRoad.stop()
 		$TimerSlowRoad.stop()
+		$GameTheme.stop()
+		$GameOverSFX.play()
+		await $GameOverSFX.finished
+		$GameOverTheme.play()
 
 
 func _on_chicken_player_two_scored():
@@ -93,6 +97,10 @@ func _on_chicken_player_two_scored():
 		$ChickenPlayerTwo.paused()
 		$TimerFastRoad.stop()
 		$TimerSlowRoad.stop()
+		$GameTheme.stop()
+		$GameOverSFX.play()
+		await $GameOverSFX.finished
+		$GameOverTheme.play()
 
 
 func _on_timer_event_timeout():

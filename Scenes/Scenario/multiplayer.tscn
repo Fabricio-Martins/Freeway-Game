@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bywj5of5xn641"]
+[gd_scene load_steps=17 format=3 uid="uid://bywj5of5xn641"]
 
 [ext_resource type="Script" path="res://Scenes/Scenario/multiplayer.gd" id="1_fr3cj"]
 [ext_resource type="Texture2D" uid="uid://bykyggb5t6vb7" path="res://Assets/Scenario/Road.png" id="1_ixyy1"]
@@ -14,6 +14,8 @@
 [ext_resource type="AudioStream" uid="uid://8o8wkl2em38r" path="res://Soundtrack/ideiagalinha2.ogg" id="11_4mcre"]
 [ext_resource type="AudioStream" uid="uid://birwmsrtxanbj" path="res://Soundtrack/galinha_sfx.ogg" id="13_ynrt8"]
 [ext_resource type="AudioStream" uid="uid://sqgh07utwq22" path="res://Soundtrack/pato_sfx.ogg" id="14_l40wx"]
+[ext_resource type="AudioStream" uid="uid://lja27541r04j" path="res://Soundtrack/galinhawin.ogg" id="15_swinb"]
+[ext_resource type="AudioStream" uid="uid://dm78gif2xierm" path="res://Soundtrack/galinha2.ogg" id="16_hv2kd"]
 
 [node name="MultiplayerMode" type="Node2D"]
 script = ExtResource("1_fr3cj")
@@ -54,9 +56,9 @@ theme_override_font_sizes/font_size = 0
 text = "0"
 
 [node name="Menu" type="Button" parent="UI"]
-offset_left = 3.0
+offset_left = 290.0
 offset_top = 2.0
-offset_right = 24.0
+offset_right = 311.0
 offset_bottom = 14.0
 theme_override_fonts/font = ExtResource("3_3ol1i")
 theme_override_font_sizes/font_size = 10
@@ -70,9 +72,9 @@ visible = false
 visible = false
 
 [node name="Fullscreen" type="Button" parent="UI"]
-offset_left = 29.0
+offset_left = 235.0
 offset_top = 2.0
-offset_right = 80.0
+offset_right = 286.0
 offset_bottom = 14.0
 theme_override_fonts/font = ExtResource("3_3ol1i")
 theme_override_font_sizes/font_size = 10
@@ -127,8 +129,9 @@ position = Vector2(200, 175)
 wait_time = 15.0
 autostart = true
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="GameTheme" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_4mcre")
+volume_db = -2.0
 autoplay = true
 
 [node name="DamageChickenSFX" type="AudioStreamPlayer2D" parent="."]
@@ -136,6 +139,13 @@ stream = ExtResource("13_ynrt8")
 
 [node name="DamageDuckSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_l40wx")
+
+[node name="GameOverSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_swinb")
+
+[node name="GameOverTheme" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_hv2kd")
+volume_db = 8.0
 
 [connection signal="invert_event" from="." to="ChickenPlayerOne" method="_on_multiplayer_mode_invert_event"]
 [connection signal="invert_event" from="." to="ChickenPlayerTwo" method="_on_multiplayer_mode_invert_event"]

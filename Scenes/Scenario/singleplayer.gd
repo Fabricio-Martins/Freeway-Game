@@ -20,10 +20,21 @@ signal fog_event
 var tempo = 0
 var _is_full_screen: bool = true
 var _is_invulnerable: bool = false
+var _game_over: bool = false
+var _is_last_life: bool = false
 
+@onready var heart_size = 16
+@onready var max_hearts = lives
+
+func life_changed():
+	$UI/Lives.set_size(Vector2(max_hearts * heart_size, 0))
+	if lives <= 0:
+		$UI/Lives.visible = false
+	
 func _ready():
 	$UI/EndScreen.visible = false
 	$UI/TimerEvento.visible = false
+	life_changed()
 
 func _toggle_fullscreen() -> void:
 	_is_full_screen = not _is_full_screen
@@ -69,20 +80,33 @@ func _on_timer_slow_road_timeout():
 
 func _on_chicken_player_damage():
 	lives -= 1
+	max_hearts = lives
+	life_changed()
 	var text = "Lives Left: %d"
 	if lives >= 0:
 		$UI/Health.text = text % [lives]
 	$ChickenPlayer.global_position = starting_position
-	_is_invulnerable = true
-	await get_tree().create_timer(0.5).timeout
-	_is_invulnerable = false
+	
+	if _is_last_life == false:
+		_is_invulnerable = true
+		await get_tree().create_timer(0.5).timeout
+		_is_invulnerable = false
+	
+	if lives == 1: _is_last_life = true
+	
 	if lives <= 0:
+		$ChickenPlayer.paused()
+		_game_over = true
 		$TimerFastRoad.stop()
 		$TimerSlowRoad.stop()
 		$UI/EndScreen.visible = true
 		$UI/EndScreen/VBoxContainer/GameOver.text = "GAME OVER!"
-		$ChickenPlayer.paused()
 		lives = 5
+		$SingleplayerTheme.stop()
+		$GameOverSFX.play()
+		await $GameOverSFX.finished
+		$GameOverTheme.play()
+		
 
 
 func _on_chicken_player_scored():
@@ -96,20 +120,21 @@ func _on_chicken_player_scored():
 	#	$TimerSlowRoad.stop()
 
 func _on_timer_event_timeout():
-	current_event = events[randi() % events.size()]
-	match(current_event):
-		"slow":
-			await change_warning("SLOW EVENT!")
-			emit_signal("slow_event")
-		"stuck":
-			await change_warning("CLASSIC MODE EVENT!")
-			emit_signal("stuck_event")
-		"invert":
-			await change_warning("CONFUSION EVENT!")
-			emit_signal("invert_event")
-		"fog":
-			pass
-			#emit_signal("fog_event")
+	if !_game_over:
+		current_event = events[randi() % events.size()]
+		match(current_event):
+			"slow":
+				await change_warning("SLOW EVENT!")
+				emit_signal("slow_event")
+			"stuck":
+				await change_warning("CLASSIC MODE EVENT!")
+				emit_signal("stuck_event")
+			"invert":
+				await change_warning("CONFUSION EVENT!")
+				emit_signal("invert_event")
+			"fog":
+				pass
+				#emit_signal("fog_event")
 	
 
 func change_warning(event_name):
@@ -125,3 +150,20 @@ func _on_play_again_pressed():
 
 func _on_back_to_menu_pressed():
 	get_tree().change_scene_to_file("res://Scenes/UI/Menu/menu.tscn")
+
+
+func _on_score_button_pressed():
+	$UI/EndScreen.visible = false
+	$UI/InputScore.visible = true
+
+
+func _on_input_score_score_submit(player_name):
+	$UI/InputScore.visible = false
+	$UI/Leaderboard.visible = true
+	SilentWolf.Scores.save_score(player_name, player_score)
+	print_debug("Score persisted successfully: " + str(player_name))
+
+
+func _on_leaderboard_go_back():
+	$UI/Leaderboard.visible = false
+	$UI/EndScreen.visible = true

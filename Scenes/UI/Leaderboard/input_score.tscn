@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cpq7tfbnqb4fp"]
 
-[ext_resource type="Script" path="res://Scenes/UI/Pause Menu/controls.gd" id="1_pra8d"]
+[ext_resource type="Script" path="res://Scenes/UI/Leaderboard/input_score.gd" id="1_ynk5i"]
 [ext_resource type="FontFile" uid="uid://bar3txxarkntj" path="res://Assets/Fonts/GamegirlClassic-9MVj.ttf" id="2_6gwe4"]
 [ext_resource type="FontFile" uid="uid://byxke44phuhpw" path="res://Assets/Fonts/Coders_Crux.ttf" id="3_fkxpb"]
 [ext_resource type="FontFile" uid="uid://x2h56im3stvs" path="res://Assets/Fonts/EnterCommand.ttf" id="4_rxjaw"]
@@ -63,7 +63,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_pra8d")
+script = ExtResource("1_ynk5i")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -79,9 +79,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 100.0
+offset_left = 105.0
 offset_top = 45.0
-offset_right = -120.0
+offset_right = -115.0
 offset_bottom = -55.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -135,3 +135,5 @@ theme_override_styles/normal = ExtResource("5_rsw51")
 theme_override_styles/hover = SubResource("StyleBoxFlat_odk6q")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_sdxkd")
 text = "Enviar"
+
+[connection signal="pressed" from="MarginContainer/PanelContainer/Panel/VBoxContainer/Submit" to="." method="_on_submit_pressed"]

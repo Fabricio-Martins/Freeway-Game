@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://cpcnr11r8bi4g"]
 
-[ext_resource type="Script" path="res://Scenes/UI/Pause Menu/controls.gd" id="1_gn471"]
+[ext_resource type="Script" path="res://Scenes/UI/Leaderboard/leaderboard.gd" id="1_t5djt"]
 [ext_resource type="FontFile" uid="uid://bar3txxarkntj" path="res://Assets/Fonts/GamegirlClassic-9MVj.ttf" id="2_vsh02"]
-[ext_resource type="FontFile" uid="uid://byxke44phuhpw" path="res://Assets/Fonts/Coders_Crux.ttf" id="3_012bg"]
+[ext_resource type="PackedScene" uid="uid://dgfvuqn5opqes" path="res://Scenes/UI/Leaderboard/scoreline.tscn" id="3_vdovd"]
 [ext_resource type="FontFile" uid="uid://x2h56im3stvs" path="res://Assets/Fonts/EnterCommand.ttf" id="4_8qtjs"]
 [ext_resource type="StyleBox" uid="uid://c08g3462e4gty" path="res://Assets/controls_button.tres" id="5_vsbpl"]
 
@@ -71,7 +71,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_gn471")
+script = ExtResource("1_t5djt")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -119,51 +119,13 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_63bch")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/PanelContainer"]
+[node name="Scorebox" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 10
 
-[node name="label_one" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="Scoreline" parent="MarginContainer/PanelContainer/VBoxContainer/PanelContainer/Scorebox" instance=ExtResource("3_vdovd")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("3_012bg")
-theme_override_font_sizes/font_size = 8
-text = "1.
-2.
-3.
-4.
-5.
-6.
-7.
-8.
-9.
-10."
 
-[node name="label_two" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/PanelContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("3_012bg")
-theme_override_font_sizes/font_size = 8
-text = "Fulano
-Ciclano
-Testerson"
-
-[node name="label_three" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/PanelContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("3_012bg")
-theme_override_font_sizes/font_size = 8
-text = "10
-7
-4
-2"
-horizontal_alignment = 2
-
-[node name="Submit" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
+[node name="Return" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -173,3 +135,5 @@ theme_override_styles/normal = ExtResource("5_vsbpl")
 theme_override_styles/hover = SubResource("StyleBoxFlat_n3fqs")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ic8gr")
 text = "Voltar"
+
+[connection signal="pressed" from="MarginContainer/PanelContainer/VBoxContainer/Return" to="." method="_on_return_pressed"]
