@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://h6xn44er5mhs"]
+[gd_scene load_steps=20 format=3 uid="uid://h6xn44er5mhs"]
 
 [ext_resource type="Script" path="res://Scenes/Scenario/singleplayer.gd" id="1_1skm5"]
 [ext_resource type="Texture2D" uid="uid://bykyggb5t6vb7" path="res://Assets/Scenario/Road.png" id="2_aaixt"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cpcnr11r8bi4g" path="res://Scenes/UI/Leaderboard/leaderboard.tscn" id="11_wodyb"]
 [ext_resource type="PackedScene" uid="uid://cpq7tfbnqb4fp" path="res://Scenes/UI/Leaderboard/input_score.tscn" id="12_7pkd6"]
 [ext_resource type="AudioStream" uid="uid://bdc4pdw3gpq32" path="res://Soundtrack/gameover.ogg" id="14_qapeb"]
+[ext_resource type="PackedScene" uid="uid://d03xn5q1pp4fo" path="res://Scenes/UI/Ingame/duck_counter.tscn" id="14_ufjjx"]
 [ext_resource type="AudioStream" uid="uid://7weisdcgjy7g" path="res://Soundtrack/galinha_score.ogg" id="15_ht6mx"]
 [ext_resource type="AudioStream" uid="uid://dm78gif2xierm" path="res://Soundtrack/galinha2.ogg" id="15_t0lvy"]
 [ext_resource type="Texture2D" uid="uid://b2gkj3b721hcn" path="res://Assets/Interface/FreeWayHeart.png" id="16_2s6ug"]
@@ -151,6 +152,14 @@ offset_bottom = 16.0
 texture = ExtResource("16_2s6ug")
 stretch_mode = 1
 
+[node name="duckCounter" parent="UI" instance=ExtResource("14_ufjjx")]
+visible = false
+offset_left = 308.0
+offset_top = 164.0
+offset_right = 308.0
+offset_bottom = 164.0
+scale = Vector2(0.7, 0.7)
+
 [node name="TimerEvent" type="Timer" parent="."]
 wait_time = 15.0
 autostart = true
@@ -175,6 +184,7 @@ stream = ExtResource("14_qapeb")
 stream = ExtResource("15_t0lvy")
 volume_db = 10.0
 
+[connection signal="duck_timer" from="." to="UI/duckCounter" method="_on_singleplayer_mode_duck_timer"]
 [connection signal="game_over" from="." to="UI/Pause Menu" method="_on_singleplayer_mode_game_over"]
 [connection signal="invert_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_invert_event"]
 [connection signal="player_can_move" from="." to="ChickenPlayer" method="_on_singleplayer_mode_player_can_move"]
@@ -194,4 +204,5 @@ volume_db = 10.0
 [connection signal="go_back" from="UI/Leaderboard" to="." method="_on_leaderboard_go_back"]
 [connection signal="exit_pressed" from="UI/InputScore" to="." method="_on_input_score_exit_pressed"]
 [connection signal="score_submit" from="UI/InputScore" to="." method="_on_input_score_score_submit"]
+[connection signal="timer_ended" from="UI/duckCounter" to="." method="_on_duck_counter_timer_ended"]
 [connection signal="timeout" from="TimerEvent" to="." method="_on_timer_event_timeout"]

@@ -21,6 +21,7 @@ signal show_leaderboard
 signal game_over
 signal player_cant_move
 signal player_can_move
+signal duck_timer
 
 var tempo = 0
 var _cooldown_timer: float = 0.5
@@ -165,7 +166,8 @@ func _on_timer_event_timeout():
 			"fog":
 				pass
 				#emit_signal("fog_event")
-	
+	emit_signal("duck_timer")
+	$UI/duckCounter.visible = true
 
 func change_warning(event_name):
 	$UI/WarningManager.change_message(event_name)
@@ -244,3 +246,7 @@ func _on_input_score_exit_pressed():
 	$UI/InputScore.visible = false
 	$UI/EndScreen/VBoxContainer/ScoreButton.visible = true
 	$UI/EndScreen.visible = true
+
+
+func _on_duck_counter_timer_ended():
+	$UI/duckCounter.visible = false

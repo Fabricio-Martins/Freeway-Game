@@ -17,6 +17,7 @@ signal slow_event
 signal stuck_event
 signal invert_event
 signal fog_event
+signal duck_timer
 
 var _is_full_screen: bool = true
 
@@ -139,6 +140,8 @@ func _on_timer_event_timeout():
 		"fog":
 			pass
 			#emit_signal("fog_event")
+	emit_signal("duck_timer")
+	$UI/duckCounter.visible = true
 
 func change_warning(event_name):
 	$UI/WarningManager.change_message(event_name)
@@ -152,3 +155,7 @@ func _on_play_again_pressed():
 
 func _on_back_to_menu_pressed():
 	get_tree().change_scene_to_file("res://Scenes/UI/Menu/menu.tscn")
+
+
+func _on_duck_counter_timer_ended():
+	$UI/duckCounter.visible = false
