@@ -5,6 +5,8 @@ var flag = 0
 
 var _is_full_screen: bool = true
 
+signal show_leaderboard
+
 func _ready():
 	$MarginContainer/VBoxContainerOne/Singleplayer.grab_focus()
 
@@ -35,6 +37,7 @@ func _on_exit_pressed():
 	get_tree().quit()
 
 func _on_leaderboard_pressed():
+	emit_signal('show_leaderboard')
 	$Leaderboard.visible = true
 
 

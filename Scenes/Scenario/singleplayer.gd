@@ -18,6 +18,7 @@ signal stuck_event
 signal invert_event
 signal fog_event
 signal show_leaderboard
+signal game_over
 
 var tempo = 0
 var _is_full_screen: bool = true
@@ -100,6 +101,7 @@ func _on_chicken_player_damage():
 	if lives <= 0:
 		$ChickenPlayer.paused()
 		_game_over = true
+		emit_signal("game_over")
 		$TimerFastRoad.stop()
 		$TimerSlowRoad.stop()
 		$UI/EndScreen.visible = true
@@ -184,7 +186,6 @@ func _load_local_scoreboard():
 			continue
 		score_data = score.split('+')
 		scores.append({"Name": score_data[0], "Score": score_data[1]})
-	
 	
 	var idx=1
 	for score in scores:

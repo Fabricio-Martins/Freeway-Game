@@ -37,8 +37,6 @@ func _load_local_scoreboard():
 
 func _ready():
 	var sw_result: Dictionary = await SilentWolf.Scores.get_scores().sw_get_scores_complete
-	print("Scores: " + str(sw_result.scores))
-	# var scores = sw_result.scores
 	_load_local_scoreboard()
 
 func _on_return_pressed():
@@ -57,8 +55,9 @@ func write_scores_file(filename, scores):
 		file.store_string(score) # Cada linha seria tipo: "Nome+Score;"
 	file.close()
 
-
-
-
 func _on_singleplayer_mode_show_leaderboard():
+	_load_local_scoreboard()
+
+
+func _on_menu_show_leaderboard():
 	_load_local_scoreboard()

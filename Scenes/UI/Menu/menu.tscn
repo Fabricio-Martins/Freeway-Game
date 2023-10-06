@@ -107,6 +107,7 @@ Artes Adicionais:  Lucca Toledo"
 visible = false
 layout_mode = 1
 
+[connection signal="show_leaderboard" from="." to="Leaderboard" method="_on_menu_show_leaderboard"]
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Singleplayer" to="." method="_on_singleplayer_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Multiplayer" to="." method="_on_multiplayer_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Leaderboard" to="." method="_on_leaderboard_pressed"]

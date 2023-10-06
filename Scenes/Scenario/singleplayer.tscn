@@ -167,6 +167,7 @@ stream = ExtResource("14_qapeb")
 stream = ExtResource("15_t0lvy")
 volume_db = 10.0
 
+[connection signal="game_over" from="." to="UI/Pause Menu" method="_on_singleplayer_mode_game_over"]
 [connection signal="invert_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_invert_event"]
 [connection signal="show_leaderboard" from="." to="UI/Leaderboard" method="_on_singleplayer_mode_show_leaderboard"]
 [connection signal="slow_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_slow_event"]
