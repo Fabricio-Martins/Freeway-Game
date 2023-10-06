@@ -89,7 +89,7 @@ func _on_chicken_player_one_scored():
 	score_player_one += 1
 	_play_scored_jingle(score_player_one, 1)
 	
-	if score_player_one < 10:
+	if score_player_one <= 10:
 		$UI/ScoreboardOne.text = str(score_player_one)
 	if score_player_one >= 10:
 		$UI/EndScreen.visible = true
@@ -109,7 +109,7 @@ func _on_chicken_player_two_scored():
 	score_player_two += 1
 	_play_scored_jingle(score_player_two, 2)
 	
-	if score_player_two < 10:
+	if score_player_two <= 10:
 		$UI/ScoreboardTwo.text = str(score_player_two)
 	if score_player_two >= 10:
 		$UI/EndScreen.visible = true

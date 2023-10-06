@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cpq7tfbnqb4fp"]
+[gd_scene load_steps=13 format=3 uid="uid://cpq7tfbnqb4fp"]
 
 [ext_resource type="Script" path="res://Scenes/UI/Leaderboard/input_score.gd" id="1_ynk5i"]
 [ext_resource type="FontFile" uid="uid://bar3txxarkntj" path="res://Assets/Fonts/GamegirlClassic-9MVj.ttf" id="2_6gwe4"]
@@ -20,7 +20,55 @@ corner_radius_bottom_left = 5
 expand_margin_left = 8.0
 expand_margin_top = 10.0
 expand_margin_right = 8.0
-expand_margin_bottom = 5.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hadpg"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.6)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 3.0
+expand_margin_right = 1.0
+shadow_offset = Vector2(0.5, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_unt4y"]
+bg_color = Color(0.694118, 0.694118, 0.694118, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.6)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 3.0
+expand_margin_right = 1.0
+shadow_offset = Vector2(0.5, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ddod"]
+bg_color = Color(0.701961, 0.701961, 0.701961, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.6)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 3.0
+expand_margin_right = 1.0
+shadow_offset = Vector2(0.5, 0)
 
 [sub_resource type="Theme" id="Theme_eb61j"]
 
@@ -82,7 +130,7 @@ anchor_bottom = 1.0
 offset_left = 105.0
 offset_top = 45.0
 offset_right = -115.0
-offset_bottom = -55.0
+offset_bottom = -65.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -106,8 +154,24 @@ offset_right = 46.5
 offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 1
 
-[node name="Title" type="Label" parent="MarginContainer/PanelContainer/Panel/VBoxContainer"]
+[node name="Exit" type="Button" parent="MarginContainer/PanelContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_fkxpb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_hadpg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_unt4y")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0ddod")
+text = "x"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/PanelContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="MarginContainer/PanelContainer/Panel/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme = SubResource("Theme_eb61j")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -118,14 +182,14 @@ text = "insira
 seu nome:"
 horizontal_alignment = 1
 
-[node name="LineEdit" type="LineEdit" parent="MarginContainer/PanelContainer/Panel/VBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/PanelContainer/Panel/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("3_fkxpb")
 alignment = 1
 max_length = 12
 
-[node name="Submit" type="Button" parent="MarginContainer/PanelContainer/Panel/VBoxContainer"]
+[node name="Submit" type="Button" parent="MarginContainer/PanelContainer/Panel/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -136,4 +200,5 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_odk6q")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_sdxkd")
 text = "Enviar"
 
-[connection signal="pressed" from="MarginContainer/PanelContainer/Panel/VBoxContainer/Submit" to="." method="_on_submit_pressed"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/Panel/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/Panel/VBoxContainer/VBoxContainer2/Submit" to="." method="_on_submit_pressed"]

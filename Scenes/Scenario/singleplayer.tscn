@@ -192,5 +192,6 @@ volume_db = 10.0
 [connection signal="pressed" from="UI/Menu" to="UI/Pause Menu" method="_on_menu_pressed"]
 [connection signal="pressed" from="UI/Fullscreen" to="." method="_on_fullscreen_pressed"]
 [connection signal="go_back" from="UI/Leaderboard" to="." method="_on_leaderboard_go_back"]
+[connection signal="exit_pressed" from="UI/InputScore" to="." method="_on_input_score_exit_pressed"]
 [connection signal="score_submit" from="UI/InputScore" to="." method="_on_input_score_score_submit"]
 [connection signal="timeout" from="TimerEvent" to="." method="_on_timer_event_timeout"]

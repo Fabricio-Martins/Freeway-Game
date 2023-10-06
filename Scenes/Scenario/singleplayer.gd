@@ -192,8 +192,8 @@ func _on_input_score_score_submit(player_name):
 	player_name = player_name.to_lower()
 	$UI/InputScore.visible = false
 	$UI/Leaderboard.visible = true
-	SilentWolf.Scores.save_score(player_name, player_score)
-	print_debug("Score persisted successfully: " + str(player_name))
+	#SilentWolf.Scores.save_score(player_name, player_score)
+	#print_debug("Score persisted successfully: " + str(player_name))
 	
 	var current_scores = str(player_name, "+", player_score, "\n")
 	print(current_scores)
@@ -237,4 +237,10 @@ func _write_scores_file(filename, scores):
 
 func _on_leaderboard_go_back():
 	$UI/Leaderboard.visible = false
+	$UI/EndScreen.visible = true
+	
+
+func _on_input_score_exit_pressed():
+	$UI/InputScore.visible = false
+	$UI/EndScreen/VBoxContainer/ScoreButton.visible = true
 	$UI/EndScreen.visible = true

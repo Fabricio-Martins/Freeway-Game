@@ -36,7 +36,7 @@ func _load_local_scoreboard():
 		idx+=1
 
 func _ready():
-	var _sw_result: Dictionary = await SilentWolf.Scores.get_scores().sw_get_scores_complete
+	#var _sw_result: Dictionary = await SilentWolf.Scores.get_scores().sw_get_scores_complete
 	_load_local_scoreboard()
 
 func _on_return_pressed():
