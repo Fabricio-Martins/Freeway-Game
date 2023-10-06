@@ -66,7 +66,6 @@ theme_override_fonts/font = ExtResource("5_t5c57")
 text = "GAME OVER!"
 
 [node name="ScoreButton" type="Button" parent="UI/EndScreen/VBoxContainer"]
-visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_aruy8")
 theme_override_styles/normal = ExtResource("7_bhh86")
@@ -169,6 +168,7 @@ stream = ExtResource("15_t0lvy")
 volume_db = 10.0
 
 [connection signal="invert_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_invert_event"]
+[connection signal="show_leaderboard" from="." to="UI/Leaderboard" method="_on_singleplayer_mode_show_leaderboard"]
 [connection signal="slow_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_slow_event"]
 [connection signal="stuck_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_stuck_event"]
 [connection signal="damage" from="ChickenPlayer" to="." method="_on_chicken_player_damage"]

@@ -33,3 +33,10 @@ func _on_multiplayer_pressed():
 
 func _on_exit_pressed():
 	get_tree().quit()
+
+func _on_leaderboard_pressed():
+	$Leaderboard.visible = true
+
+
+func _on_leaderboard_go_back():
+	$Leaderboard.visible = false

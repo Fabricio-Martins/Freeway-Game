@@ -1,6 +1,7 @@
 extends Node2D
 
 const new_car = preload("res://Scenes/Characters/Enemies/Car.tscn")
+var Scoreline = preload("res://Scenes/UI/Leaderboard/scoreline.tscn")
 
 @onready var slow_road = [133, 104, 88, 58, 43]
 @onready var fast_road = [148, 118, 73, 28]
@@ -16,12 +17,14 @@ signal slow_event
 signal stuck_event
 signal invert_event
 signal fog_event
+signal show_leaderboard
 
 var tempo = 0
 var _is_full_screen: bool = true
 var _is_invulnerable: bool = false
 var _game_over: bool = false
 var _is_last_life: bool = false
+var _score_already_submitted: bool = false
 
 @onready var heart_size = 16
 @onready var max_hearts = lives
@@ -155,13 +158,55 @@ func _on_back_to_menu_pressed():
 func _on_score_button_pressed():
 	$UI/EndScreen.visible = false
 	$UI/InputScore.visible = true
-
+	_score_already_submitted = false
+	$UI/EndScreen/VBoxContainer/ScoreButton.visible = false
 
 func _on_input_score_score_submit(player_name):
+	player_name = player_name.to_lower()
 	$UI/InputScore.visible = false
 	$UI/Leaderboard.visible = true
 	SilentWolf.Scores.save_score(player_name, player_score)
 	print_debug("Score persisted successfully: " + str(player_name))
+	
+	var current_scores = str(player_name, "+", player_score, "\n")
+	print(current_scores)
+	#var scores = _read_scores_file("res://local_leaderboard.txt")
+	_write_scores_file("res://local_leaderboard.txt", current_scores)
+	
+	emit_signal("show_leaderboard")
+
+func _load_local_scoreboard():
+	var score_list = _read_scores_file("res://local_leaderboard.txt")
+	var score_data
+	var scores = []
+	for score in score_list:
+		if not score:
+			continue
+		score_data = score.split('+')
+		scores.append({"Name": score_data[0], "Score": score_data[1]})
+	
+	
+	var idx=1
+	for score in scores:
+		var line = Scoreline.instantiate()
+		line.get_node("PlayerPosition").text = str(idx) + "."
+		line.get_node('PlayerName').text = score["Name"]
+		line.get_node('PlayerScore').text = score["Score"]
+		$UI/Leaderboard/MarginContainer/PanelContainer/VBoxContainer/PanelContainer/Scorebox.add_child(line)
+		idx+=1
+
+func _read_scores_file(filename):
+	var file = FileAccess.open(filename, FileAccess.READ)
+	var score_list = file.get_as_text()
+	file.close()
+	return score_list.rsplit(';')
+	
+func _write_scores_file(filename, scores):
+	var file = FileAccess.open(filename, FileAccess.READ_WRITE)
+	file.seek_end()
+	for score in scores:
+		file.store_string(score) # Cada linha seria tipo: "Nome+Score\n"
+	file.close()
 
 
 func _on_leaderboard_go_back():

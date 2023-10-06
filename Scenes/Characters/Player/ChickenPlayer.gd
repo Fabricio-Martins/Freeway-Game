@@ -29,18 +29,18 @@ func _physics_process(delta):
 	
 	if event_invert:
 		input_direction = Vector2(
-			Input.get_action_strength("wasd_left") - Input.get_action_strength("wasd_right"),
-			Input.get_action_strength("wasd_up") - Input.get_action_strength("wasd_down")
+			Input.get_action_strength("ui_left") - Input.get_action_strength("ui_right"),
+			Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
 		)
 	elif event_stuck:
 		input_direction = Vector2(
 			0,
-			Input.get_action_strength("wasd_down") - Input.get_action_strength("wasd_up")
+			Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 		)
 	else:
 		input_direction = Vector2(
-			Input.get_action_strength("wasd_right") - Input.get_action_strength("wasd_left"),
-			Input.get_action_strength("wasd_down") - Input.get_action_strength("wasd_up")
+			Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
+			Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 		)
 	input_direction = input_direction.normalized()	
 	

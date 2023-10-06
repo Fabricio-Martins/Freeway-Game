@@ -335,6 +335,6 @@ debug_color = Color(0.996078, 0, 0.215686, 0.419608)
 
 [node name="DamageChickenSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_np7tk")
-volume_db = 10.0
+volume_db = 15.0
 
 [connection signal="area_entered" from="CollisionDetector" to="." method="_on_collision_detector_area_entered"]

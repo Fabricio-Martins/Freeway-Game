@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c00betudi16kj"]
+[gd_scene load_steps=9 format=3 uid="uid://c00betudi16kj"]
 
 [ext_resource type="Script" path="res://Scenes/UI/Menu/menu.gd" id="1_uun7w"]
 [ext_resource type="FontFile" uid="uid://bar3txxarkntj" path="res://Assets/Fonts/GamegirlClassic-9MVj.ttf" id="1_wbdkw"]
@@ -6,6 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://htgk60qdejly" path="res://Assets/non_selected_button.tres" id="3_ahxo5"]
 [ext_resource type="AudioStream" uid="uid://bowkdmq7jx6bw" path="res://Soundtrack/galinha1v2.ogg" id="5_osdt6"]
 [ext_resource type="PackedScene" uid="uid://djohl2wslk4em" path="res://Scenes/UI/Menu/utf_logo.tscn" id="6_hgdib"]
+[ext_resource type="PackedScene" uid="uid://cpcnr11r8bi4g" path="res://Scenes/UI/Leaderboard/leaderboard.tscn" id="7_xmemb"]
 
 [sub_resource type="Theme" id="Theme_haijf"]
 
@@ -64,6 +65,12 @@ theme_override_fonts/font = ExtResource("2_7sj83")
 theme_override_styles/normal = ExtResource("3_ahxo5")
 text = "Multiplayer"
 
+[node name="Leaderboard" type="Button" parent="MarginContainer/VBoxContainerOne"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7sj83")
+theme_override_styles/normal = ExtResource("3_ahxo5")
+text = "Leaderboard"
+
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainerOne"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_7sj83")
@@ -82,6 +89,7 @@ offset_bottom = 148.0
 scale = Vector2(0.6, 0.608028)
 
 [node name="Creditos" type="Label" parent="."]
+layout_mode = 0
 offset_left = 228.0
 offset_top = 143.0
 offset_right = 340.0
@@ -95,6 +103,12 @@ text = "Programação: Fabricio Damasceno
 Música: Gustavo Favaro
 Artes Adicionais:  Lucca Toledo"
 
+[node name="Leaderboard" parent="." instance=ExtResource("7_xmemb")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Singleplayer" to="." method="_on_singleplayer_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Multiplayer" to="." method="_on_multiplayer_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainerOne/Leaderboard" to="." method="_on_leaderboard_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Exit" to="." method="_on_exit_pressed"]
+[connection signal="go_back" from="Leaderboard" to="." method="_on_leaderboard_go_back"]
