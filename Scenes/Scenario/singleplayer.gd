@@ -19,8 +19,11 @@ signal invert_event
 signal fog_event
 signal show_leaderboard
 signal game_over
+signal player_cant_move
+signal player_can_move
 
 var tempo = 0
+var _cooldown_timer: float = 0.5
 var _is_full_screen: bool = true
 var _is_invulnerable: bool = false
 var _game_over: bool = false
@@ -51,7 +54,7 @@ func _toggle_fullscreen() -> void:
 func _on_fullscreen_pressed():
 	_toggle_fullscreen()
 	
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("fullscreen"):
 		_toggle_fullscreen();
 	$UI/TimerEvento.text = "EVENT DURATION: " + str($EventDuration.time_left)
@@ -91,6 +94,10 @@ func _on_chicken_player_damage():
 		$UI/Health.text = text % [lives]
 	$ChickenPlayer.global_position = starting_position
 	
+	emit_signal("player_cant_move")
+	await get_tree().create_timer(_cooldown_timer).timeout
+	emit_signal("player_can_move")
+	
 	if _is_last_life == false:
 		_is_invulnerable = true
 		await get_tree().create_timer(0.5).timeout
@@ -111,13 +118,31 @@ func _on_chicken_player_damage():
 		$GameOverSFX.play()
 		await $GameOverSFX.finished
 		$GameOverTheme.play()
-		
-
 
 func _on_chicken_player_scored():
 	player_score += 1
 	$UI/Scoreboard.text = str(player_score)
+	
+	var pitch_list = [0, 2, 4, 5, 7, 1, 2, 3, 4]
+	
+	if player_score <= 5:
+		$ScoredSFX.set_pitch_scale(1 + ((pitch_list[player_score - 1]/7.0)/2))
+		$ScoredSFX.play()
+	elif player_score > 5 and player_score < 10:
+		$ScoredSFX.set_pitch_scale(1.5 + ((pitch_list[player_score - 1])/5.0)/2)
+		$ScoredSFX.play()
+	elif player_score % 10 == 0:
+		$Scored10SFX.play()
+	else:
+		$ScoredSFX.set_pitch_scale(2)
+		$ScoredSFX.play()
+	
+	emit_signal("player_cant_move")
+	await get_tree().create_timer(_cooldown_timer).timeout
+	emit_signal("player_can_move")
+	
 	$ChickenPlayer.global_position = starting_position
+	
 	#if player_score >= 3:
 	#	$UI/MarginContainer/GameOver.text = "YOU WON!"
 	#	$ChickenPlayer.paused()

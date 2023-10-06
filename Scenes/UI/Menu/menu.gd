@@ -21,7 +21,7 @@ func _toggle_fullscreen() -> void:
 func _on_fullscreen_pressed():
 	_toggle_fullscreen()
 	
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("fullscreen"):
 		_toggle_fullscreen();
 		

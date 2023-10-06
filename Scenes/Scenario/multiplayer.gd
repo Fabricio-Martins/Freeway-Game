@@ -34,7 +34,7 @@ func _toggle_fullscreen() -> void:
 func _on_fullscreen_pressed():
 	_toggle_fullscreen();
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("fullscreen"):
 		_toggle_fullscreen();
 	
@@ -67,10 +67,29 @@ func _on_timer_slow_road_timeout():
 func _on_chicken_player_damage():
 	pass
 
+func _play_scored_jingle(score, player):
+	var pitch_list = [0, 2, 4, 5, 7, 1, 2, 3, 4]
+	
+	if player == 1:
+		$ScoredSFX.position.x = -400
+	else:
+		$ScoredSFX.position.x = 400
+	
+	if score <= 5:
+		$ScoredSFX.set_pitch_scale(1 + ((pitch_list[score - 1]/7.0)/2))
+		$ScoredSFX.play()
+	elif score > 5 and score < 10:
+		$ScoredSFX.set_pitch_scale(1.5 + ((pitch_list[score - 1])/5.0)/2)
+		$ScoredSFX.play()
+	elif score % 10 == 0:
+		$Scored10SFX.play()
+
 func _on_chicken_player_one_scored():
 	$ChickenPlayerOne.global_position = starting_position_one
+	score_player_one += 1
+	_play_scored_jingle(score_player_one, 1)
+	
 	if score_player_one < 10:
-		score_player_one += 1
 		$UI/ScoreboardOne.text = str(score_player_one)
 	if score_player_one >= 10:
 		$UI/EndScreen.visible = true
@@ -87,8 +106,10 @@ func _on_chicken_player_one_scored():
 
 func _on_chicken_player_two_scored():
 	$ChickenPlayerTwo.global_position = starting_position_two
+	score_player_two += 1
+	_play_scored_jingle(score_player_two, 2)
+	
 	if score_player_two < 10:
-		score_player_two += 1
 		$UI/ScoreboardTwo.text = str(score_player_two)
 	if score_player_two >= 10:
 		$UI/EndScreen.visible = true

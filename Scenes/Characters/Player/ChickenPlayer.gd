@@ -17,6 +17,7 @@ extends CharacterBody2D
 @onready var event_invert = false 
 
 var input_direction
+var _can_move: bool = true
 
 signal scored
 signal damage
@@ -25,7 +26,9 @@ func _ready():
 	update_animation_parameters(starting_direction)
 	screen_size = get_viewport_rect().size
 
-func _physics_process(delta):
+func _physics_process(_delta):
+	if not _can_move:
+		return
 	
 	if event_invert:
 		input_direction = Vector2(
@@ -96,3 +99,11 @@ func _on_singleplayer_mode_invert_event():
 	event_invert = true
 	await get_tree().create_timer(event_duration).timeout
 	event_invert = false
+
+
+func _on_singleplayer_mode_player_cant_move():
+	_can_move = false
+
+
+func _on_singleplayer_mode_player_can_move():
+	_can_move = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://h6xn44er5mhs"]
+[gd_scene load_steps=19 format=3 uid="uid://h6xn44er5mhs"]
 
 [ext_resource type="Script" path="res://Scenes/Scenario/singleplayer.gd" id="1_1skm5"]
 [ext_resource type="Texture2D" uid="uid://bykyggb5t6vb7" path="res://Assets/Scenario/Road.png" id="2_aaixt"]
@@ -14,8 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://cpcnr11r8bi4g" path="res://Scenes/UI/Leaderboard/leaderboard.tscn" id="11_wodyb"]
 [ext_resource type="PackedScene" uid="uid://cpq7tfbnqb4fp" path="res://Scenes/UI/Leaderboard/input_score.tscn" id="12_7pkd6"]
 [ext_resource type="AudioStream" uid="uid://bdc4pdw3gpq32" path="res://Soundtrack/gameover.ogg" id="14_qapeb"]
+[ext_resource type="AudioStream" uid="uid://7weisdcgjy7g" path="res://Soundtrack/galinha_score.ogg" id="15_ht6mx"]
 [ext_resource type="AudioStream" uid="uid://dm78gif2xierm" path="res://Soundtrack/galinha2.ogg" id="15_t0lvy"]
 [ext_resource type="Texture2D" uid="uid://b2gkj3b721hcn" path="res://Assets/Interface/FreeWayHeart.png" id="16_2s6ug"]
+[ext_resource type="AudioStream" uid="uid://dqbuu3qb2m5ti" path="res://Soundtrack/galinha_score_10.ogg" id="16_ths1q"]
 
 [node name="SingleplayerMode" type="Node2D"]
 script = ExtResource("1_1skm5")
@@ -157,6 +159,12 @@ autostart = true
 stream = ExtResource("10_xc3sd")
 autoplay = true
 
+[node name="ScoredSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_ht6mx")
+
+[node name="Scored10SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_ths1q")
+
 [node name="EventDuration" type="Timer" parent="."]
 wait_time = 10.0
 
@@ -169,6 +177,8 @@ volume_db = 10.0
 
 [connection signal="game_over" from="." to="UI/Pause Menu" method="_on_singleplayer_mode_game_over"]
 [connection signal="invert_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_invert_event"]
+[connection signal="player_can_move" from="." to="ChickenPlayer" method="_on_singleplayer_mode_player_can_move"]
+[connection signal="player_cant_move" from="." to="ChickenPlayer" method="_on_singleplayer_mode_player_cant_move"]
 [connection signal="show_leaderboard" from="." to="UI/Leaderboard" method="_on_singleplayer_mode_show_leaderboard"]
 [connection signal="slow_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_slow_event"]
 [connection signal="stuck_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_stuck_event"]
