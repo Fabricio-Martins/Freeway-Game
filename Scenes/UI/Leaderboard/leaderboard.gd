@@ -5,6 +5,31 @@ signal go_back
 var player_name
 var Scoreline = preload("res://Scenes/UI/Leaderboard/scoreline.tscn")
 
+func _ready():
+	pass
+	#_load_online_scoreboard()
+	#_load_local_scoreboard()
+
+func _load_online_scoreboard():
+	await get_tree().create_timer(1).timeout
+	
+	for score in $MarginContainer/PanelContainer/VBoxContainer/PanelContainer/Scorebox.get_children():
+		score.queue_free()
+		
+	var _sw_result: Dictionary = await SilentWolf.Scores.get_scores().sw_get_scores_complete
+	var scores = _sw_result.scores
+		
+	var idx=1
+	for score in scores:
+		if idx > 5:
+			break
+		var line=Scoreline.instantiate()
+		line.get_node("PlayerPosition").text = str(idx) + "."
+		line.get_node('PlayerName').text =score.player_name
+		line.get_node('PlayerScore').text = str(score.score)
+		$MarginContainer/PanelContainer/VBoxContainer/PanelContainer/Scorebox.add_child(line)
+		idx+=1
+
 func sort_by_score(a, b):
 	if int(a[1]) > int(b[1]):
 		return true
@@ -35,10 +60,6 @@ func _load_local_scoreboard():
 		$MarginContainer/PanelContainer/VBoxContainer/PanelContainer/Scorebox.add_child(line)
 		idx+=1
 
-func _ready():
-	#var _sw_result: Dictionary = await SilentWolf.Scores.get_scores().sw_get_scores_complete
-	_load_local_scoreboard()
-
 func _on_return_pressed():
 	emit_signal("go_back")
 
@@ -56,8 +77,10 @@ func write_scores_file(filename, scores):
 	file.close()
 
 func _on_singleplayer_mode_show_leaderboard():
-	_load_local_scoreboard()
+	_load_online_scoreboard()
+	#_load_local_scoreboard()
 
 
 func _on_menu_show_leaderboard():
-	_load_local_scoreboard()
+	_load_online_scoreboard()
+	#_load_local_scoreboard()
