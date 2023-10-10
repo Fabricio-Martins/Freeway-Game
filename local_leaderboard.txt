@@ -8,3 +8,5 @@ teste+1
 fabricio+7
 testerson+4
 teste+1
+pica+5
+pica+13

@@ -21,6 +21,8 @@ var _can_move: bool = true
 
 signal scored
 signal damage
+signal walking
+signal not_walking
 
 func _ready():
 	update_animation_parameters(starting_direction)
@@ -45,6 +47,11 @@ func _physics_process(_delta):
 			Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
 			Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 		)
+	if input_direction:
+		emit_signal("walking")
+	else:
+		emit_signal("not_walking")
+		
 	input_direction = input_direction.normalized()	
 	
 	update_animation_parameters(input_direction)

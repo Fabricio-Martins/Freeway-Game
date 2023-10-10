@@ -40,6 +40,7 @@ func life_changed():
 		$UI/Lives.visible = false
 	
 func _ready():
+	$SingleplayerThemeLead.play()
 	$UI/EndScreen.visible = false
 	$UI/TimerEvento.visible = false
 	life_changed()
@@ -115,7 +116,8 @@ func _on_chicken_player_damage():
 		$UI/EndScreen.visible = true
 		$UI/EndScreen/VBoxContainer/GameOver.text = "GAME OVER!"
 		lives = 5
-		$SingleplayerTheme.stop()
+		$SingleplayerThemeBase.stop()
+		$SingleplayerThemeLead.stop()
 		$GameOverSFX.play()
 		await $GameOverSFX.finished
 		$GameOverTheme.play()
@@ -250,3 +252,11 @@ func _on_input_score_exit_pressed():
 
 func _on_duck_counter_timer_ended():
 	$UI/duckCounter.visible = false
+
+
+func _on_chicken_player_walking():
+	$SingleplayerThemeLead.set_volume_db(0)
+
+
+func _on_chicken_player_not_walking():
+	$SingleplayerThemeLead.set_volume_db(-50)

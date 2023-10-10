@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://h6xn44er5mhs"]
+[gd_scene load_steps=21 format=3 uid="uid://h6xn44er5mhs"]
 
 [ext_resource type="Script" path="res://Scenes/Scenario/singleplayer.gd" id="1_1skm5"]
 [ext_resource type="Texture2D" uid="uid://bykyggb5t6vb7" path="res://Assets/Scenario/Road.png" id="2_aaixt"]
@@ -10,15 +10,16 @@
 [ext_resource type="StyleBox" uid="uid://htgk60qdejly" path="res://Assets/non_selected_button.tres" id="7_bhh86"]
 [ext_resource type="PackedScene" uid="uid://dl3idxfm4f7vw" path="res://Scenes/UI/Pause Menu/pause_menu.tscn" id="8_dk1p5"]
 [ext_resource type="PackedScene" uid="uid://c7imfnnvbn0hk" path="res://Scenes/UI/Ingame/warning_manager.tscn" id="9_hbx3o"]
-[ext_resource type="AudioStream" uid="uid://8o8wkl2em38r" path="res://Soundtrack/ideiagalinha2.ogg" id="10_xc3sd"]
 [ext_resource type="PackedScene" uid="uid://cpcnr11r8bi4g" path="res://Scenes/UI/Leaderboard/leaderboard.tscn" id="11_wodyb"]
 [ext_resource type="PackedScene" uid="uid://cpq7tfbnqb4fp" path="res://Scenes/UI/Leaderboard/input_score.tscn" id="12_7pkd6"]
 [ext_resource type="AudioStream" uid="uid://bdc4pdw3gpq32" path="res://Soundtrack/gameover.ogg" id="14_qapeb"]
 [ext_resource type="PackedScene" uid="uid://d03xn5q1pp4fo" path="res://Scenes/UI/Ingame/duck_counter.tscn" id="14_ufjjx"]
 [ext_resource type="AudioStream" uid="uid://7weisdcgjy7g" path="res://Soundtrack/galinha_score.ogg" id="15_ht6mx"]
+[ext_resource type="AudioStream" uid="uid://cha23v8tit3me" path="res://Soundtrack/ideiagalinha_base.ogg" id="15_s4oo5"]
 [ext_resource type="AudioStream" uid="uid://dm78gif2xierm" path="res://Soundtrack/galinha2.ogg" id="15_t0lvy"]
 [ext_resource type="Texture2D" uid="uid://b2gkj3b721hcn" path="res://Assets/Interface/FreeWayHeart.png" id="16_2s6ug"]
 [ext_resource type="AudioStream" uid="uid://dqbuu3qb2m5ti" path="res://Soundtrack/galinha_score_10.ogg" id="16_ths1q"]
+[ext_resource type="AudioStream" uid="uid://brflvqqvebyai" path="res://Soundtrack/ideiagalinha_lead.ogg" id="16_wbgf1"]
 
 [node name="SingleplayerMode" type="Node2D"]
 script = ExtResource("1_1skm5")
@@ -164,8 +165,14 @@ scale = Vector2(0.7, 0.7)
 wait_time = 15.0
 autostart = true
 
-[node name="SingleplayerTheme" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_xc3sd")
+[node name="SingleplayerThemeBase" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_s4oo5")
+volume_db = -5.622
+autoplay = true
+
+[node name="SingleplayerThemeLead" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_wbgf1")
+volume_db = -50.0
 autoplay = true
 
 [node name="ScoredSFX" type="AudioStreamPlayer2D" parent="."]
@@ -193,7 +200,9 @@ volume_db = 10.0
 [connection signal="slow_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_slow_event"]
 [connection signal="stuck_event" from="." to="ChickenPlayer" method="_on_singleplayer_mode_stuck_event"]
 [connection signal="damage" from="ChickenPlayer" to="." method="_on_chicken_player_damage"]
+[connection signal="not_walking" from="ChickenPlayer" to="." method="_on_chicken_player_not_walking"]
 [connection signal="scored" from="ChickenPlayer" to="." method="_on_chicken_player_scored"]
+[connection signal="walking" from="ChickenPlayer" to="." method="_on_chicken_player_walking"]
 [connection signal="timeout" from="TimerFastRoad" to="." method="_on_timer_fast_road_timeout"]
 [connection signal="timeout" from="TimerSlowRoad" to="." method="_on_timer_slow_road_timeout"]
 [connection signal="pressed" from="UI/EndScreen/VBoxContainer/ScoreButton" to="." method="_on_score_button_pressed"]
