@@ -146,6 +146,8 @@ func _on_chicken_player_scored():
 	
 	$ChickenPlayer.global_position = starting_position
 	
+	
+	# Condição de Vitória
 	#if player_score >= 3:
 	#	$UI/MarginContainer/GameOver.text = "YOU WON!"
 	#	$ChickenPlayer.paused()
@@ -193,16 +195,16 @@ func _on_score_button_pressed():
 	$UI/EndScreen/VBoxContainer/ScoreButton.visible = false
 
 func _on_input_score_score_submit(player_name):
-	player_name = player_name.to_lower()
+	# player_name = player_name.to_lower()
 	$UI/InputScore.visible = false
 	$UI/Leaderboard.visible = true
-	#SilentWolf.Scores.save_score(player_name, player_score)
-	#print_debug("Score persisted successfully: " + str(player_name))
+	SilentWolf.Scores.save_score(player_name, player_score)
+	print_debug("Score persisted successfully: " + str(player_name))
 	
-	var current_scores = str(player_name, "+", player_score, "\n")
-	print(current_scores)
+	#var current_scores = str(player_name, "+", player_score, "\n")
+	#print(current_scores)
 	#var scores = _read_scores_file("res://local_leaderboard.txt")
-	_write_scores_file("res://local_leaderboard.txt", current_scores)
+	#_write_scores_file("res://local_leaderboard.txt", current_scores)
 	
 	emit_signal("show_leaderboard")
 

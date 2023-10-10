@@ -72,6 +72,7 @@ theme_override_styles/normal = ExtResource("3_ahxo5")
 text = "Leaderboard"
 
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainerOne"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_7sj83")
 theme_override_styles/normal = ExtResource("3_ahxo5")
