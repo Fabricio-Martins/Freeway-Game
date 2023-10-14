@@ -2,8 +2,8 @@ extends Node2D
 
 const new_car = preload("res://Scenes/Characters/Enemies/Car.tscn")
 
-@onready var slow_road = [164, 133, 104, 88, 58, 43]
-@onready var fast_road = [148, 118, 73, 28]
+@onready var slow_road = [163, 132, 103, 87, 57, 42]
+@onready var fast_road = [147, 117, 72, 27]
 @onready var starting_position_one = $ChickenPlayerOne.global_position
 @onready var starting_position_two = $ChickenPlayerTwo.global_position
 @onready var score_player_one = 0
@@ -47,7 +47,7 @@ func _on_timer_fast_road_timeout():
 		fast_car.position.x = -8
 		fast_car.linear_velocity = Vector2(randf_range(200, 210), 0)
 	else:
-		fast_car.set_scale(Vector2(-1, -1))
+		fast_car.get_node("AnimatedSprite2D").flip_h = true
 		fast_car.position.x = 328
 		fast_car.linear_velocity = Vector2(randf_range(-200, -210), 0)
 
@@ -60,7 +60,7 @@ func _on_timer_slow_road_timeout():
 		slow_car.position.x = -8
 		slow_car.linear_velocity = Vector2(randf_range(100, 110), 0)
 	else:
-		slow_car.set_scale(Vector2(-1, -1))
+		slow_car.get_node("AnimatedSprite2D").flip_h = true
 		slow_car.position.x = 328
 		slow_car.linear_velocity = Vector2(randf_range(-100, -110), 0)
 
