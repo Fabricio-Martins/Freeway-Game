@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dl3idxfm4f7vw"]
+[gd_scene load_steps=8 format=3 uid="uid://dl3idxfm4f7vw"]
 
 [ext_resource type="FontFile" uid="uid://bar3txxarkntj" path="res://Assets/Fonts/GamegirlClassic-9MVj.ttf" id="1_lbyl2"]
 [ext_resource type="Script" path="res://Scenes/UI/Pause Menu/pause_menu.gd" id="1_pw4ow"]
 [ext_resource type="FontFile" uid="uid://yer46p5f54ad" path="res://Assets/Fonts/alterebro-pixel-font.ttf" id="2_gtqtn"]
 [ext_resource type="StyleBox" uid="uid://htgk60qdejly" path="res://Assets/non_selected_button.tres" id="3_glbeq"]
 [ext_resource type="PackedScene" uid="uid://cpudbbpgpywe7" path="res://Scenes/UI/Pause Menu/controls.tscn" id="5_4qsye"]
+[ext_resource type="PackedScene" uid="uid://bj5puppd5mmjp" path="res://Scenes/UI/Audio/audio_slider.tscn" id="6_4uwuo"]
 
 [sub_resource type="Theme" id="Theme_haijf"]
 
@@ -72,6 +73,13 @@ text = "Voltar para o Menu"
 [node name="Controls" parent="." instance=ExtResource("5_4qsye")]
 visible = false
 layout_mode = 1
+
+[node name="AudioSlider" parent="." instance=ExtResource("6_4uwuo")]
+offset_left = 17.0
+offset_top = 164.0
+offset_right = 67.0
+offset_bottom = 180.0
+bus_name = "Master"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Resume" to="." method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainerOne/Controls" to="." method="_on_ControlsButton_pressed"]

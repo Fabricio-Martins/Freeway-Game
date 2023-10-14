@@ -1,19 +1,19 @@
 [gd_scene load_steps=11 format=3 uid="uid://bm6grjp0h2i4s"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Enemies/Car.gd" id="1_chbb7"]
-[ext_resource type="Texture2D" uid="uid://dhn26t18k0wgf" path="res://Assets/Enemies/Cars/car1.png" id="2_fup00"]
-[ext_resource type="Texture2D" uid="uid://bikrvikvya4lo" path="res://Assets/Enemies/Cars/car2.png" id="3_7oh61"]
-[ext_resource type="Texture2D" uid="uid://cka6t2ibrhqm0" path="res://Assets/Enemies/Cars/car3.png" id="4_m0tka"]
-[ext_resource type="Texture2D" uid="uid://bnwnmehegmlaa" path="res://Assets/Enemies/Cars/car4.png" id="5_17gc5"]
-[ext_resource type="Texture2D" uid="uid://c8k1y38l7dt46" path="res://Assets/Enemies/Cars/car5.png" id="6_7i1ns"]
-[ext_resource type="Texture2D" uid="uid://cfsmmdb5bktuk" path="res://Assets/Enemies/Cars/car6.png" id="7_h3ap2"]
+[ext_resource type="Texture2D" uid="uid://dw5pc6wsd8txh" path="res://Assets/Enemies/New Cars/car_sketch1.png" id="2_yl3ob"]
+[ext_resource type="Texture2D" uid="uid://dupuxp1cnptwj" path="res://Assets/Enemies/New Cars/car_sketch2.png" id="3_8ra8s"]
+[ext_resource type="Texture2D" uid="uid://bniy0de6eu0hf" path="res://Assets/Enemies/New Cars/car_sketch3.png" id="4_cdnfp"]
+[ext_resource type="Texture2D" uid="uid://dmqh1kiqldvhw" path="res://Assets/Enemies/New Cars/car_sketch4.png" id="5_mnf8k"]
+[ext_resource type="Texture2D" uid="uid://bf7fn5ivusxvi" path="res://Assets/Enemies/New Cars/car_sketch5.png" id="6_tegmy"]
+[ext_resource type="Texture2D" uid="uid://dsklb5imni4hq" path="res://Assets/Enemies/New Cars/car_sketch6.png" id="7_5xjgn"]
 [ext_resource type="PackedScene" uid="uid://vavvw8yop8hu" path="res://Scenes/Characters/Enemies/HazardArea.tscn" id="8_0mgh4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_q706a"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_fup00")
+"texture": ExtResource("2_yl3ob")
 }],
 "loop": true,
 "name": &"car1",
@@ -21,7 +21,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_7oh61")
+"texture": ExtResource("3_8ra8s")
 }],
 "loop": true,
 "name": &"car2",
@@ -29,7 +29,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_m0tka")
+"texture": ExtResource("4_cdnfp")
 }],
 "loop": true,
 "name": &"car3",
@@ -37,7 +37,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_17gc5")
+"texture": ExtResource("5_mnf8k")
 }],
 "loop": true,
 "name": &"car4",
@@ -45,7 +45,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_7i1ns")
+"texture": ExtResource("6_tegmy")
 }],
 "loop": true,
 "name": &"car5",
@@ -53,7 +53,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_h3ap2")
+"texture": ExtResource("7_5xjgn")
 }],
 "loop": true,
 "name": &"car6",
@@ -61,7 +61,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sg7wx"]
-size = Vector2(16, 8)
+size = Vector2(20, 11.5)
 
 [node name="Car" type="RigidBody2D"]
 process_mode = 3
@@ -75,10 +75,11 @@ animation = &"car1"
 [node name="HazardArea" parent="." instance=ExtResource("8_0mgh4")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HazardArea"]
+position = Vector2(0, 1.25)
 shape = SubResource("RectangleShape2D_sg7wx")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(4.17233e-07, 4.76837e-07)
-scale = Vector2(0.8, 0.533333)
+position = Vector2(0, 1)
+scale = Vector2(1, 0.6)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

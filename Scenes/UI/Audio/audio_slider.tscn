@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj5puppd5mmjp"]
+
+[ext_resource type="Script" path="res://Scenes/UI/Audio/audio_slider.gd" id="1_coxhs"]
+[ext_resource type="Texture2D" uid="uid://btqpo8dgb4bau" path="res://Assets/Interface/sound_icon.png" id="2_ogyuf"]
+
+[node name="AudioSlider" type="HSlider"]
+offset_left = 16.0
+offset_right = 43.0
+offset_bottom = 16.0
+max_value = 1.0
+step = 0.001
+script = ExtResource("1_coxhs")
+
+[node name="SoundIcon" type="Sprite2D" parent="."]
+position = Vector2(-8, 8)
+texture = ExtResource("2_ogyuf")

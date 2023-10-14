@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfsmmdb5bktuk"
-path="res://.godot/imported/car6.png-6313a2e4c89260e476ee74b71fed8fa8.ctex"
+uid="uid://bniy0de6eu0hf"
+path="res://.godot/imported/car_sketch3.png-d67ef9397cdc96f2d4a8fcfa4e565be5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Enemies/Cars/car6.png"
-dest_files=["res://.godot/imported/car6.png-6313a2e4c89260e476ee74b71fed8fa8.ctex"]
+source_file="res://Assets/Enemies/New Cars/car_sketch3.png"
+dest_files=["res://.godot/imported/car_sketch3.png-d67ef9397cdc96f2d4a8fcfa4e565be5.ctex"]
 
 [params]
 

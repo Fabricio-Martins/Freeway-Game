@@ -3,8 +3,8 @@ extends Node2D
 const new_car = preload("res://Scenes/Characters/Enemies/Car.tscn")
 var Scoreline = preload("res://Scenes/UI/Leaderboard/scoreline.tscn")
 
-@onready var slow_road = [133, 104, 88, 58, 43]
-@onready var fast_road = [148, 118, 73, 28]
+@onready var slow_road = [132, 103, 87, 57, 42]
+@onready var fast_road = [147, 117, 72, 27]
 @onready var starting_position = $ChickenPlayer.global_position
 @onready var lives = 5
 @onready var player_score = 0
@@ -67,11 +67,11 @@ func _on_timer_fast_road_timeout():
 	fast_car.position.y = fast_road[randi() % fast_road.size()]
 	if fast_car.position.y > 90:
 		fast_car.position.x = -8
-		fast_car.linear_velocity = Vector2(randf_range(200, 210), 0)
+		fast_car.linear_velocity = Vector2(randf_range(205, 210), 0)
 	else:
-		fast_car.set_scale(Vector2(-1, -1))
+		fast_car.get_node("AnimatedSprite2D").flip_h = true
 		fast_car.position.x = 328
-		fast_car.linear_velocity = Vector2(randf_range(-200, -210), 0)
+		fast_car.linear_velocity = Vector2(randf_range(-205, -210), 0)
 
 
 func _on_timer_slow_road_timeout():
@@ -80,11 +80,11 @@ func _on_timer_slow_road_timeout():
 	slow_car.position.y = slow_road[randi() % slow_road.size()]
 	if slow_car.position.y > 90:
 		slow_car.position.x = -8
-		slow_car.linear_velocity = Vector2(randf_range(100, 110), 0)
+		slow_car.linear_velocity = Vector2(randf_range(105, 110), 0)
 	else:
-		slow_car.set_scale(Vector2(-1, -1))
+		slow_car.get_node("AnimatedSprite2D").flip_h = true
 		slow_car.position.x = 328
-		slow_car.linear_velocity = Vector2(randf_range(-100, -110), 0)
+		slow_car.linear_velocity = Vector2(randf_range(-105, -110), 0)
 
 
 func _on_chicken_player_damage():
