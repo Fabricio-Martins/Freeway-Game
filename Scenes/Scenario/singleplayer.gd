@@ -198,7 +198,7 @@ func _on_input_score_score_submit(player_name):
 	# player_name = player_name.to_lower()
 	$UI/InputScore.visible = false
 	$UI/Leaderboard.visible = true
-	SilentWolf.Scores.save_score(player_name, player_score)
+	SilentWolf.Scores.save_score(player_name, player_score, "tournament")
 	print_debug("Score persisted successfully: " + str(player_name))
 	
 	#var current_scores = str(player_name, "+", player_score, "\n")

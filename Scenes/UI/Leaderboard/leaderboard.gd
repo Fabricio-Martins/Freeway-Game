@@ -16,7 +16,7 @@ func _load_online_scoreboard():
 	for score in $MarginContainer/PanelContainer/VBoxContainer/PanelContainer/Scorebox.get_children():
 		score.queue_free()
 		
-	var _sw_result: Dictionary = await SilentWolf.Scores.get_scores().sw_get_scores_complete
+	var _sw_result: Dictionary = await SilentWolf.Scores.get_scores(5, "tournament").sw_get_scores_complete
 	var scores = _sw_result.scores
 		
 	var idx=1
