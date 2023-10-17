@@ -75,6 +75,7 @@ visible = false
 layout_mode = 1
 
 [node name="AudioSlider" parent="." instance=ExtResource("6_4uwuo")]
+layout_mode = 0
 offset_left = 17.0
 offset_top = 164.0
 offset_right = 67.0
